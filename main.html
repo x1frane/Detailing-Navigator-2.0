@@ -1,0 +1,500 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ЛКП в Норильске</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Documentary look: paper ground, serif headings, rules instead of boxes, one accent used for data only. */
+:root{
+  --bg:#F4F1EA; --surface:#FBF9F4; --ink:#1B1E20; --muted:#56524A; --line:#D6D0C3;
+  --accent:#9A3B1B; --accent-soft:#EFDCCF;
+  --warn-bg:#F6E7A8; --warn-ink:#4F3A00;
+  --l-clear:#7C93A8; --l-base:#4E6A84; --l-primer:#9A9689; --l-ed:#5E5B53;
+  --l-ppf:#2F5D50; --l-ceramic:#9A3B1B;
+  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181A; --surface:#1D2022; --ink:#ECE8DF; --muted:#ADA89C; --line:#34373A;
+    --accent:#E8906A; --accent-soft:#3A2A21;
+    --warn-bg:#3D3410; --warn-ink:#F0DA92;
+    --l-clear:#7E97AD; --l-base:#5F7F9C; --l-primer:#8F8B80; --l-ed:#B3AEA1;
+    --l-ppf:#6FB09C; --l-ceramic:#E8906A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181A; --surface:#1D2022; --ink:#ECE8DF; --muted:#ADA89C; --line:#34373A;
+  --accent:#E8906A; --accent-soft:#3A2A21;
+  --warn-bg:#3D3410; --warn-ink:#F0DA92;
+  --l-clear:#7E97AD; --l-base:#5F7F9C; --l-primer:#8F8B80; --l-ed:#B3AEA1;
+  --l-ppf:#6FB09C; --l-ceramic:#E8906A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4rem}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--font-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 3rem;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.wrap{max-width:66rem;margin:0 auto}
+a{color:var(--accent);text-underline-offset:.18em}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h1{font-weight:600;line-height:1.05;letter-spacing:-.015em}
+h2{font-size:1.7rem;font-weight:600;line-height:1.15}
+h3{font-size:1.1rem;font-weight:600;line-height:1.25}
+p{margin:0}
+.lead{font-size:1.2rem;line-height:1.5;max-width:40rem}
+.note{font-size:.9rem;color:var(--muted);max-width:46rem}
+
+/* nav: plain text, no pills */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:baseline;gap:1.5rem;padding-block:.7rem}
+.brand{font:600 1.05rem/1 var(--font-display);white-space:nowrap;color:var(--ink);text-decoration:none}
+.links{display:flex;gap:1.1rem;overflow-x:auto;scrollbar-width:none;min-width:0}
+.links::-webkit-scrollbar{display:none}
+.links a{color:var(--muted);text-decoration:none;font-size:.9rem;white-space:nowrap;padding-block:.2rem}
+.links a:hover{color:var(--ink);text-decoration:underline}
+
+/* hero */
+.hero{padding-block:4rem 3rem;display:grid;gap:1.75rem}
+.hero h1{font-size:clamp(2.3rem,7vw,4.4rem);max-width:15ch}
+.takeaways{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem;margin-top:1.5rem}
+.take{border-top:2px solid var(--ink);padding-top:.8rem;display:grid;gap:.35rem;align-content:start}
+.take b{font:600 1.08rem/1.3 var(--font-display)}
+.take span{color:var(--muted);font-size:.97rem}
+
+/* sections: heading in a left column on wide screens, content on the right */
+section{padding-block:3rem;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);column-gap:3rem;align-content:start}
+section > *{margin-bottom:1.4rem;min-width:0}
+section > *:last-child{margin-bottom:0}
+section > h2{margin-bottom:1.2rem}
+@media (min-width:60rem){
+  section{grid-template-columns:13rem minmax(0,1fr)}
+  section > h2{grid-column:1;grid-row:1 / span 40;position:sticky;top:4.5rem;align-self:start}
+  section > *:not(h2){grid-column:2}
+}
+
+/* tags and placeholders */
+.tag{font-size:.85rem;font-style:italic;color:var(--muted);white-space:nowrap}
+.tbd{display:inline-block;font-size:.85rem;background:var(--warn-bg);color:var(--warn-ink);padding:.05rem .4rem;border-radius:3px}
+
+/* tables: the only boxed things */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.95rem}
+th,td{text-align:left;padding:.75rem .9rem;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:.88rem;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.num{font-family:var(--font-mono);font-size:.88rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* layer scale chart */
+.scale{display:grid;gap:.1rem}
+.scale h3{margin-bottom:.6rem}
+.srow{display:grid;grid-template-columns:10rem 1fr 6.5rem;align-items:center;gap:.9rem;padding-block:.3rem}
+.srow .name{font-size:.93rem}
+.track{position:relative;height:1.1rem;background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 1px),var(--line) calc(20% - 1px) 20%)}
+.bar{position:absolute;top:0;bottom:0;min-width:5px}
+.srow .val{font:400 .85rem/1 var(--font-mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:10rem 1fr 6.5rem;gap:.9rem;margin-top:.2rem}
+.axis .ticks{display:flex;justify-content:space-between;font:400 .75rem/1 var(--font-mono);color:var(--muted)}
+.sep{height:1px;background:var(--line);margin-block:.5rem}
+
+/* text groups: rules and spacing, no cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.8rem 2.2rem}
+.card,.block,.center{border-top:1px solid var(--line);padding-top:.8rem;display:grid;gap:.55rem;align-content:start;min-width:0}
+.card p,.card li,.block li{font-size:1rem}
+.card ul,.block ul,.block ol{margin:0;padding-left:1.1rem;display:grid;gap:.35rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1.8rem 2.5rem}
+.stats{display:flex;flex-wrap:wrap;gap:1rem 3rem}
+.stat{display:grid;gap:.1rem}
+.stat b{font:600 2.3rem/1.1 var(--font-display);font-variant-numeric:lining-nums tabular-nums}
+.stat span{font-size:.9rem;color:var(--muted)}
+.call{background:var(--accent-soft);padding:1rem 1.2rem;border-radius:4px;max-width:44rem}
+.call b{font-weight:600}
+.warn{background:var(--warn-bg);color:var(--warn-ink);padding:.8rem 1rem;border-radius:4px;font-size:.95rem;max-width:44rem}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.6rem 1fr;gap:.5rem;padding-block:.9rem;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);font:600 1.6rem/1 var(--font-display);color:var(--accent)}
+.steps b{font-weight:600}
+.steps span{display:block;color:var(--muted);font-size:.97rem}
+
+/* centers */
+.center h3{font-size:1.15rem}
+.center dl{margin:0;display:grid;grid-template-columns:7.5rem 1fr;gap:.4rem .8rem;font-size:.95rem}
+.center dt{color:var(--muted)}
+.center dd{margin:0;min-width:0}
+
+/* faq */
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;padding:.9rem 0;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.3rem;line-height:1;color:var(--accent)}
+details[open] summary::after{content:"−"}
+details p{padding-bottom:1rem;color:var(--muted);max-width:42rem}
+
+/* sources */
+.src{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1.6rem 2.5rem}
+.src h3{font-size:1rem;margin-bottom:.5rem}
+.src ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:.92rem}
+.src li{overflow-wrap:anywhere}
+
+footer{border-top:1px solid var(--line);padding-top:1.5rem;color:var(--muted);font-size:.9rem;display:grid;gap:.4rem}
+
+@media (max-width:640px){
+  .srow,.axis{grid-template-columns:1fr}
+  .srow .val{text-align:left}
+  .axis > :first-child,.axis > :last-child{display:none}
+  .center dl{grid-template-columns:1fr;gap:.1rem}
+  .center dt{margin-top:.4rem}
+  .nav .wrap{gap:.8rem}
+  section{padding-block:2.2rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">ЛКП в Норильске</a>
+    <nav class="links" aria-label="Разделы">
+      <a href="#lkp">Как устроено ЛКП</a>
+      <a href="#norilsk">В Норильске</a>
+      <a href="#zashita">Способы защиты</a>
+      <a href="#keramika">Керамика</a>
+      <a href="#ppf">Плёнка PPF</a>
+      <a href="#poryadok">Порядок работ</a>
+      <a href="#uhod">Уход</a>
+      <a href="#ceny">Цены</a>
+      <a href="#centry">Центры</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#istochniki">Источники</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+<div class="hero">
+  <h1>Чем защитить краску машины в Норильске</h1>
+  <p class="lead">Слой лака на кузове по толщине сопоставим с человеческим волосом и со временем стирается. Здесь собрано, что действует на кузов в Норильске, какие бывают защиты и как за ними ухаживать.</p>
+  <div class="takeaways">
+    <div class="take"><b>Лак расходуется</b><span>Каждая полировка снимает часть слоя, поэтому полировать нужно как можно реже.</span></div>
+    <div class="take"><b>От щебня защищает плёнка</b><span>Вывод авторов: главный твёрдый абразив на дорогах это щебень, а от сколов защищает полиуретановая плёнка (PPF).</span></div>
+    <div class="take"><b>Керамика облегчает мойку</b><span>Она защищает от химии и ультрафиолета, но от сколов не спасает.</span></div>
+  </div>
+</div>
+
+<section id="lkp">
+  <h2>Как устроено ЛКП</h2>
+  <p class="lead">Заводское покрытие состоит из пяти слоёв. Общая толщина обычно 80–180 мкм, у большинства массовых машин около 100–120 мкм.</p>
+
+  <div class="scale" role="img" aria-label="Толщина слоёв ЛКП и защитных покрытий в микрометрах, в одном масштабе от 0 до 250 мкм">
+    <h3>Толщина в одном масштабе, мкм</h3>
+    <div class="srow"><span class="name">Лак</span><div class="track"><i class="bar" style="left:16%;width:16%;background:var(--l-clear)"></i></div><span class="val">40–80</span></div>
+    <div class="srow"><span class="name">Базовая эмаль</span><div class="track"><i class="bar" style="left:4%;width:6%;background:var(--l-base)"></i></div><span class="val">10–25</span></div>
+    <div class="srow"><span class="name">Грунт-выравниватель</span><div class="track"><i class="bar" style="left:12%;width:4%;background:var(--l-primer)"></i></div><span class="val">30–40</span></div>
+    <div class="srow"><span class="name">Катафорезный грунт</span><div class="track"><i class="bar" style="left:6%;width:4%;background:var(--l-ed)"></i></div><span class="val">15–25</span></div>
+    <div class="sep"></div>
+    <div class="srow"><span class="name">Керамика (SiO₂)</span><div class="track"><i class="bar" style="left:.4%;width:.8%;background:var(--l-ceramic)"></i></div><span class="val">1–3</span></div>
+    <div class="srow"><span class="name">Плёнка PPF</span><div class="track"><i class="bar" style="left:60%;width:20%;background:var(--l-ppf)"></i></div><span class="val">150–200</span></div>
+    <div class="axis"><span></span><div class="ticks"><span>0</span><span>50</span><span>100</span><span>150</span><span>200</span><span>250</span></div><span></span></div>
+    <p class="note">Толщины слоёв ориентировочные и зависят от производителя. Фосфатный слой на схеме не показан: это тонкая плёнка, её измеряют массой на м².</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Слой</th><th>Задача</th><th>Ориентир</th></tr></thead>
+      <tbody>
+        <tr><td>Фосфатный</td><td>Повышает сцепление краски со сталью и сам даёт дополнительную защиту</td><td class="num">тонкая плёнка</td></tr>
+        <tr><td>Катафорезный грунт</td><td>Наносится погружением в ванну под током, доходит до скрытых полостей, защищает от ржавчины</td><td class="num">15–25 мкм</td></tr>
+        <tr><td>Грунт-выравниватель</td><td>Сглаживает микронеровности, создаёт основу под краску</td><td class="num">30–40 мкм</td></tr>
+        <tr><td>Базовая эмаль</td><td>Даёт цвет, сама плохо защищена от износа и ультрафиолета</td><td class="num">10–25 мкм</td></tr>
+        <tr><td>Лак</td><td>Защищает цвет от солнца и принимает на себя износ</td><td class="num">40–80 мкм, чаще 50–60</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cards">
+    <div class="card"><h3>Лак расходуется</h3><p>Каждая полировка снимает часть слоя, поэтому полировать нужно как можно реже.</p></div>
+    <div class="card"><h3>Сначала замер</h3><p>Перед защитой стоит измерить ЛКП толщиномером. Значения от 300 мкм и больше говорят о повторной окраске.</p></div>
+    <div class="card"><h3>Сколы до металла</h3><p>Если скол дошёл до грунта и металла, плёнка или керамика его не вылечат. Нужен ремонт или покраска.</p></div>
+  </div>
+</section>
+
+<section id="norilsk">
+  <h2>Что действует на кузов в Норильске</h2>
+  <p class="lead">Ниже только то, что подтверждено источниками. Где данных нет, так и написано.</p>
+
+  <div class="stats">
+    <div class="stat"><b>~280</b><span>дней устойчивых морозов в году</span></div>
+    <div class="stat"><b>130+</b><span>дней с метелями</span></div>
+    <div class="stat"><b>−53 °C</b><span>доходит мороз</span></div>
+    <div class="stat"><b>24 м/с</b><span>ветер до</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Климат и ветер</h3>
+      <ul>
+        <li>Климат субарктический, резко континентальный.</li>
+        <li>Средняя годовая скорость ветра около 6 м/с.</li>
+        <li>Полярная ночь с 30 ноября по 13 января.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Резкие перепады температуры</h3>
+      <p>Температура может подняться на 20 градусов за пару часов. Для ЛКП опасны не сами морозы, а резкие перепады при мойке и заезде в тёплый бокс.</p>
+    </div>
+    <div class="card">
+      <h3>Снег</h3>
+      <p>Из-за мороза и ветра снег становится плотным и спрессованным. Жёстким скребком кузов скрести нельзя, нужна мягкая щётка.</p>
+    </div>
+    <div class="card">
+      <h3>Дороги</h3>
+      <ul>
+        <li>Дороги посыпают мелким щебнем фракцией 3–8 мм (публикация 2024 года).</li>
+        <li>Граншлак несколько лет назад запретил применять Роспотребнадзор, его заменили базальтовым отсевом. Водители жаловались, что отлетающие камешки повреждают машины.</li>
+        <li>Гравий и грунт в источниках не упоминаются.</li>
+        <li>Про реагенты данных нет: <span class="tbd">[УТОЧНИТЬ в «Норильскавтодоре»]</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Промышленные выбросы</h3>
+      <ul>
+        <li>Диоксид серы исторически главная проблема воздуха Норильска.</li>
+        <li>«Норникель» заявляет о снижении выбросов на 45% к 2025–2026 годам относительно 2015 года.</li>
+        <li>Кислотные осадки вызывают коррозию металлов.</li>
+        <li>Прямых измерений влияния на лак мы не нашли, поэтому говорим «возможно ускоряют старение».</li>
+        <li>Известны случаи, когда пыль с цехов оседала на припаркованных машинах.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ветровые повреждения</h3>
+      <p>Бывали случаи, когда на машину падала фасадная плитка со здания. Это про сколы и вмятины от ветра, а не про лак.</p>
+    </div>
+  </div>
+
+  <div class="call"><b>Вывод авторов.</b> Главный твёрдый абразив на дорогах это щебень, и от его сколов защищает плёнка PPF. <span class="tag claim">вывод авторов</span></div>
+</section>
+
+<section id="zashita">
+  <h2>Способы защиты</h2>
+  <p class="lead">От сколов и сильных царапин защищает только плёнка. Керамика и жидкое стекло работают как гидрофобная и химическая защита и облегчают мойку.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Вариант</th><th>Что даёт</th><th>Срок службы по источникам</th><th>В Норильске</th></tr></thead>
+      <tbody>
+        <tr><td>Воск, полироли</td><td>Блеск, гидрофобность, жертвенный слой вместо лака</td><td>Спрей держится недолго, эмульсия дольше, паста дольше всех</td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+        <tr><td>Жидкое стекло</td><td>Твёрдая плёнка, жёсткость около 7H, гидрофобность</td><td>До 1–1,5 лет</td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+        <tr><td>Нанокерамика (SiO₂)</td><td>Защита от ультрафиолета, химии и мелких царапин, лёгкая мойка, плёнка 1–3 мкм</td><td>До 3 лет по оценке журнала, до 5 лет в гарантиях, до 8 лет <span class="tag claim">производитель заявляет</span></td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+        <tr><td>Полиуретановая плёнка (PPF)</td><td>Защита от сколов и пескоструя, толщина 150–200 мкм, самовосстановление царапин при нагреве</td><td>Около 5 лет по оценке эксперта, гарантии производителей 2–10 лет <span class="tag claim">производитель заявляет</span></td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+        <tr><td>Виниловая плёнка</td><td>Цвет, стиль, защита от лёгких потёртостей</td><td>Недолговечна, быстро выгорает, легко мнётся</td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+        <tr><td>Антикор</td><td>Защита от ржавчины скрытых полостей, днища, арок, порогов, стоек, лонжеронов</td><td>Зависит от состава</td><td><span class="tbd">[УТОЧНИТЬ]</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="call"><b>Лучше всего работает сочетание.</b> Плёнку ставят на самые уязвимые места: капот, бампер, фары, зеркала. Остальной кузов покрывают керамикой. Керамику можно наносить и поверх плёнки.</div>
+  <p class="note">Сроки до 8 лет у керамики и до 10 лет у плёнки это заявления производителей. Отдельных данных для севера нет.</p>
+</section>
+
+<section id="keramika">
+  <h2>Керамика</h2>
+  <p class="lead">Жидкий состав на основе диоксида кремния (SiO₂). После отверждения образует на лаке твёрдую прозрачную плёнку около 1–3 мкм. Прочно удерживается на лаке.</p>
+
+  <div class="two">
+    <div class="block">
+      <h3>Нанесение</h3>
+      <ol>
+        <li>Кузов моют, очищают от вкраплений, при необходимости полируют и обезжиривают.</li>
+        <li>Состав наносят небольшими участками аппликатором, через короткую выдержку располировывают микрофиброй.</li>
+        <li>По данным Ceramic Pro, три слоя дают заметный рост блеска, а дополнительные слои долговечность не повышают.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <h3>Отверждение</h3>
+      <ol>
+        <li><b>12–24 часа:</b> машина стоит в тёплом сухом боксе, к кузову нельзя прикасаться и допускать воду.</li>
+        <li><b>Первые 7 дней:</b> нельзя мыть и использовать химию.</li>
+        <li><b>7–14 дней:</b> первая мойка. Точный срок смотрите в инструкции производителя состава.</li>
+        <li>Дальше только мягкая мойка без жёстких щёток и агрессивной химии.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3>Мороз и перепады температуры</h3>
+    <p>Данных о том, что керамика трескается на холоде, мы не нашли. Производитель из Новосибирска заявляет, что его покрытие эластично и выдерживает перепады до −50 °C <span class="tag claim">производитель заявляет</span>.</p>
+    <p>Реальный риск другой: тёплая вода на сильном морозе может повредить сам лак, особенно после кузовного ремонта.</p>
+    <ul>
+      <li>Не мойте машину тёплой водой сразу после мороза: сначала дайте кузову прогреться.</li>
+      <li>Не делайте резких перепадов температуры без необходимости.</li>
+      <li>Снег убирайте мягкой щёткой, а не пластиковым скребком.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ppf">
+  <h2>Полиуретановая плёнка (PPF)</h2>
+  <p class="lead">Эластичная прозрачная плёнка толщиной 150–200 мкм. Гасит удары камней и песка, защищает лак от химии и ультрафиолета.</p>
+
+  <div class="two">
+    <div class="block">
+      <h3>Нанесение</h3>
+      <ul>
+        <li>Работают в чистом помещении без пыли.</li>
+        <li>Рабочая температура по инструкциям производителей 18–25 °C, у некоторых до 30 °C.</li>
+        <li>Плёнку кладут на мыльный раствор, выравнивают ракелем.</li>
+        <li>Края подворачивают внутрь деталей, чтобы мойка высокого давления их не поддела.</li>
+        <li>Окончательная адгезия набирается примерно за 24 часа.</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h3>Самовосстановление</h3>
+      <ul>
+        <li>Лёгкие царапины на верхнем слое затягиваются при нагреве.</li>
+        <li>Минимальная температура активации у большинства премиальных плёнок 49–60 °C, лучше всего работает 60–74 °C.</li>
+        <li>Ниже примерно 15 °C плёнка восстанавливается медленно, поэтому зимой нужен нагрев вручную: водой около 60 °C или промышленным феном.</li>
+        <li>На северных морозах нагрев лучше делать в тёплом боксе. <span class="tag claim">вывод авторов</span> <span class="tbd">[УТОЧНИТЬ у норильских мастеров]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn"><b>Ограничения.</b> Если под плёнкой остаются сколы, ржавчина или повреждения лака, образуются пузыри и проблемы. При плохом состоянии лака сначала нужна покраска. Со временем ресурс самовосстановления верхнего слоя снижается: через 7–10 лет плёнка восстанавливается хуже.</div>
+</section>
+
+<section id="poryadok">
+  <h2>Порядок работ</h2>
+  <p class="lead">Любая защита держится только на подготовленном лаке. Керамика фиксирует на нём все царапины и помутнения навсегда.</p>
+  <ol class="steps">
+    <li><div><b>Осмотр и замер</b><span>Толщиномером измеряют толщину ЛКП, ищут сколы и очаги коррозии.</span></div></li>
+    <li><div><b>Мойка</b><span>Предварительная бесконтактная мойка пеной, затем ручная по технологии двух вёдер.</span></div></li>
+    <li><div><b>Деконтаминация</b><span>Удаляют вкрапления металла, смолу и битум химическим очистителем и синтетической глиной.</span></div></li>
+    <li><div><b>Полировка</b><span>Только если есть дефекты, потому что она снимает часть лака. Лёгкая убирает паутинку, глубокая нужна при сильном износе.</span></div></li>
+    <li><div><b>Обезжиривание</b><span>Спиртовой состав убирает остатки полировальных паст.</span></div></li>
+    <li><div><b>Защита</b><span>Керамика наносится слоями, плёнка клеится на мыльный раствор.</span></div></li>
+    <li><div><b>Отверждение</b><span>Выдержка в тёплом боксе, затем ограничения по мойке.</span></div></li>
+  </ol>
+  <p class="note">Плёнку клеят на целый подготовленный лак. Если на кузове сколы и коррозия, их нужно устранить до оклейки.</p>
+</section>
+
+<section id="uhod">
+  <h2>Уход за защитой</h2>
+  <div class="two">
+    <div class="block">
+      <h3>После керамики</h3>
+      <ul>
+        <li><b>12–24 часа:</b> не прикасаться к кузову, не допускать воду.</li>
+        <li><b>7 дней:</b> не мыть, без химии.</li>
+        <li><b>7–14 дней:</b> первая мойка, срок по инструкции производителя.</li>
+        <li>Дальше мягкая мойка, без жёстких щёток и агрессивной химии.</li>
+        <li>Снег только мягкой щёткой.</li>
+      </ul>
+    </div>
+    <div class="block">
+      <h3>После плёнки</h3>
+      <ul>
+        <li><b>48–72 часа:</b> не мыть.</li>
+        <li>Не направлять струю мойки высокого давления на края и швы.</li>
+        <li>Мягкий шампунь с нейтральным pH и мягкие мочалки.</li>
+        <li>Керамику можно наносить поверх плёнки, чтобы её было проще мыть.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ceny">
+  <h2>Цены: ориентиры по материку</h2>
+  <div class="warn">Цен по Норильску у нас пока нет. Ниже ориентиры по другим регионам. В Норильске стоимость обычно отличается, уточняйте в центре. <span class="tbd">[УТОЧНИТЬ: норильские прайсы]</span></div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Услуга</th><th>Ориентир</th><th>Источник</th><th>Проверено</th></tr></thead>
+      <tbody>
+        <tr><td>Оклейка PPF, полный кузов</td><td class="num">149 000 – 240 000 ₽</td><td>Сеть техцентров, цена зависит от модели</td><td class="num">31.10.2026</td></tr>
+        <tr><td>Оклейка PPF, Красноярск</td><td class="num">от 220 000 ₽</td><td>Один детейлинг-центр, карточка давно не обновлялась</td><td class="num">31.10.2026</td></tr>
+        <tr><td>Цветной полиуретан, Красноярск</td><td class="num">300 000 ₽</td><td>Тот же центр</td><td class="num">31.10.2026</td></tr>
+        <tr><td>Полировка с керамикой</td><td class="num">от 52 000 ₽</td><td>Сеть техцентров, цена для внедорожника, 2026 год</td><td class="num">31.10.2026</td></tr>
+        <tr><td>Глубокая полировка, Красноярск</td><td class="num">от 8 000 ₽</td><td>Один детейлинг-центр, цена «от»</td><td class="num">31.10.2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Цены «от». Точная стоимость зависит от автомобиля и состояния лака. <span class="tag ref">ориентир</span></p>
+</section>
+
+<section id="centry">
+  <h2>Детейлинг и кузовные центры Норильска</h2>
+  <p class="lead">По данным 2ГИС в Норильске есть несколько центров, которые полируют кузов. Нанесение плёнки заявлено у Carstyle и ВВС. Керамику и именно PPF ни один центр в источниках не называет, это нужно уточнять по телефону.</p>
+  <div class="warn">Данные взяты со страниц 2ГИС, часть из них давно не обновлялась. Перед поездкой позвоните. Цен на защитные покрытия в Норильске мы не нашли. <span class="tbd">[УТОЧНИТЬ]</span></div>
+  <div class="cards"><article class="center"><h3>Carstyle</h3><dl><dt>Тип</dt><dd>Детейлинг и кузовной ремонт</dd><dt>Адрес</dt><dd>Центральный район, 1 этаж. Улицу и дом 2ГИС не показывает <span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Телефон</dt><dd>+7 913 164-02-08 (указан в ссылке WhatsApp на странице 2ГИС)</dd><dt>График</dt><dd>Ежедневно 10:00–20:00, по предварительной записи</dd><dt>Услуги</dt><dd>Полировка, покраска, ремонт вмятин, геометрия, сварка; в списке 2ГИС также аренда тёплого бокса, химчистка, нанесение плёнки</dd><dt>Тип плёнки / керамика / цены</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Рейтинг 2ГИС</dt><dd>5,0 (49 оценок)</dd></dl><p class="note">Страница 2ГИС давно не обновлялась. Проверено 31.10.2026.</p></article><article class="center"><h3>GTS (Гтс), студия детейлинга</h3><dl><dt>Тип</dt><dd>Студия детейлинга</dd><dt>Адрес</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Телефон</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Услуги</dt><dd>Полировка, химчистка, комплексная мойка (по списку 2ГИС)</dd><dt>Цены</dt><dd>Комплексная мойка от 10 000 ₽ (по списку 2ГИС)</dd><dt>Керамика / плёнка</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd></dl><p class="note">Сведения только из строки в списке 2ГИС, отдельную карточку открыть не удалось. Не путать с Москвой: GT Detailing на Лобачевского, 114 это другая компания. Проверено 31.10.2026.</p></article><article class="center"><h3>ВВС</h3><dl><dt>Тип</dt><dd>Мойка и тюнинг</dd><dt>Адрес</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Телефон</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Услуги</dt><dd>Мойка, химчистка, покраска, ремонт вмятин, тюнинг, нанесение плёнки (по списку 2ГИС)</dd><dt>Какая плёнка: PPF или винил</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd></dl><p class="note">Сведения только из строки в списке 2ГИС. Проверено 31.10.2026.</p></article><article class="center"><h3>АвтоБлеск</h3><dl><dt>Тип</dt><dd>Кузовной ремонт</dd><dt>Адрес</dt><dd>Центральный район. Улицу и дом 2ГИС не показывает <span class="tbd">[УТОЧНИТЬ]</span></dd><dt>Телефон</dt><dd>Номер скрыт на странице 2ГИС, есть Telegram <span class="tbd">[УТОЧНИТЬ]</span></dd><dt>График</dt><dd>Ежедневно 11:00–20:00</dd><dt>Услуги</dt><dd>Полировка, покраска, ремонт вмятин, геометрия, сварка</dd><dt>Рейтинг 2ГИС</dt><dd>4,8 (39 оценок)</dd></dl><p class="note">Это кузовной ремонт с полировкой, керамики и плёнки в списке услуг нет. Страница давно не обновлялась. Проверено 31.10.2026.</p></article><article class="center"><h3>Горыныч</h3><dl><dt>Тип</dt><dd>Автосервис, кузовной ремонт</dd><dt>Услуги</dt><dd>Геометрия, покраска, полировка, ремонт вмятин, сварка</dd><dt>Адрес / телефон</dt><dd><span class="tbd">[УТОЧНИТЬ]</span></dd></dl><p class="note">Сведения только из списка 2ГИС. Защитных покрытий в списке нет. Проверено 31.10.2026.</p></article></div>
+  <p class="note">Источники: <a href="https://2gis.ru/norilsk/firm/70000001061521234" target="_blank" rel="noopener">Carstyle в 2ГИС</a>, <a href="https://2gis.ru/norilsk/firm/70000001083628806" target="_blank" rel="noopener">АвтоБлеск в 2ГИС</a>.</p>
+</section>
+
+<section id="faq">
+  <h2>Частые вопросы</h2>
+  <div>
+    <details><summary>Нужна ли керамика, если есть плёнка?</summary><p>Не обязательна, но помогает: поверх плёнки керамику наносят, чтобы проще мыть.</p></details>
+    <details><summary>Защитит ли керамика от сколов?</summary><p>Нет. От сколов и сильных царапин защищает только плёнка.</p></details>
+    <details><summary>Когда можно мыть машину после керамики?</summary><p>Не раньше 7 дней, часто советуют 14. Смотрите инструкцию производителя.</p></details>
+    <details><summary>Когда можно мыть после плёнки?</summary><p>Не раньше чем через 48–72 часа, и не направляйте струю на края.</p></details>
+    <details><summary>Самовосстановится ли плёнка на морозе?</summary><p>Сама от тепла солнца зимой нет. Нужен нагрев феном или тёплой водой около 60 °C.</p></details>
+    <details><summary>Можно ли клеить плёнку на старую машину со сколами?</summary><p>Сначала нужно устранить сколы и коррозию.</p></details>
+    <details><summary>Сколько стоит защита в Норильске?</summary><p>Точных цен у нас нет. Смотрите ориентиры в разделе «Цены» и звоните в центры.</p></details>
+  </div>
+</section>
+
+<section id="istochniki">
+  <h2>Источники</h2>
+  <p class="note">Ссылки найдены поиском 31.10.2026. Страницы открыть полностью не удалось, поэтому числа стоит сверять с первоисточником.</p>
+  <div class="src">
+    <div><h3>ЛКП и слои</h3><ul>
+      <li><a href="https://www.autonews.ru/news/62c3dec19a7947472f69fdbb" target="_blank" rel="noopener">Autonews, толщина ЛКП</a></li>
+      <li><a href="https://www.zr.ru/content/articles/920338-lkp-na-kryshe-tolshche-chem-na-dve/" target="_blank" rel="noopener">За рулём, толщина ЛКП</a></li>
+      <li><a href="https://agris.fao.org/search/en/records/6474b04d5eb437ddff726414" target="_blank" rel="noopener">AGRIS, фосфатирование и адгезия</a></li>
+    </ul></div>
+    <div><h3>Защитные покрытия</h3><ul>
+      <li><a href="https://www.zr.ru/content/articles/911326-zashchitnye-pokrytiya-dlya-kuzova/" target="_blank" rel="noopener">За рулём, керамика или жидкое стекло</a></li>
+      <li><a href="https://www.zr.ru/content/articles/928429-5-sposobov-zashchitit-kuzov-vashe/" target="_blank" rel="noopener">За рулём, пять способов защитить кузов</a></li>
+      <li><a href="https://www.zr.ru/content/news/975703-kak-zashchitit-kuzov-mashiny-zimo/" target="_blank" rel="noopener">За рулём, как защитить кузов зимой</a></li>
+      <li><a href="https://aurora-detailing.ru/blog/skolko-derzhitsya-keramika-na-avtomobile" target="_blank" rel="noopener">Срок службы керамики, 2026</a></li>
+      <li><a href="https://smartopen.pro/news/uhod-za-avto-posle-naneseniya-keramiki/" target="_blank" rel="noopener">Мойка после керамики</a></li>
+      <li><a href="https://www.deteiling.pro/kompaniya/news/obrabotka-kuzova-avtomobilya-keramikoy-polnyy-gayd/" target="_blank" rel="noopener">Условия сушки и полимеризации керамики</a></li>
+      <li><a href="https://nstu.ru/reliz_get?id=133821" target="_blank" rel="noopener">Пресс-релиз НГТУ НЭТИ о нанокерамике</a></li>
+      <li><a href="https://profile.ru/news/cars/o-chem-vazhno-pomnit-pri-mojke-avtomobilya-v-moroz-sovety-specialistov-994366/amp/" target="_blank" rel="noopener">Мойка машины в мороз, Профиль</a></li>
+    </ul></div>
+    <div><h3>Плёнка PPF</h3><ul>
+      <li><a href="https://gilroyblackout.com/blog/self-healing-ppf-how-it-works-guide/" target="_blank" rel="noopener">Самовосстановление, температуры</a></li>
+      <li><a href="https://www.revol.com.sg/?p=1871918" target="_blank" rel="noopener">Толщина и самовосстановление</a></li>
+      <li><a href="https://www.avtogermes.ru/dop_oborudovanie/environmental_protection/oklejka-zashhitnoj-plenkoj/oklejka-avto-poliuretanovoj-plenkoj/" target="_blank" rel="noopener">PPF 150–200 мкм</a></li>
+      <li><a href="https://new.avanceytec.com.mx/img-nueva-generacion/materiales/ppf/oraguard-2815/Ficha%20tecnica%20Oraguard%201.pdf" target="_blank" rel="noopener">Технические данные Oraguard</a></li>
+      <li><a href="https://cdn.shopify.com/s/files/1/1381/9855/files/BLK.pdf" target="_blank" rel="noopener">Температуры установки, TeckWrap</a></li>
+      <li><a href="https://igepa.be/media/05/c7/9c/1743211564/06-0113-1114_2024_FlexiShieldEU_CosmeticPPFInstallation_EN.pdf" target="_blank" rel="noopener">Температуры установки, FlexiShield</a></li>
+      <li><a href="https://www.carvertical.com/en/blog/how-long-does-paint-protection-film-last" target="_blank" rel="noopener">Гарантии PPF, carVertical</a></li>
+    </ul></div>
+    <div><h3>Норильск</h3><ul>
+      <li><a href="https://www.sbras.ru/files/files/brochures/v_gorizonte/v_gorizonte_akademgorodka_2_0_-_str_44-60.pdf" target="_blank" rel="noopener">Климат района, СО РАН</a></li>
+      <li><a href="https://ieig.sfu-kras.ru/node/127" target="_blank" rel="noopener">Ветер и метели, СФУ</a></li>
+      <li><a href="https://nornickel.ru/sustainability/projects/sulphur" target="_blank" rel="noopener">Выбросы SO₂, «Норникель»</a></li>
+      <li><a href="https://www.ttelegraf.ru/news/chetyre-dorozhnye-organizaczii-budut-vesti-zimnee-soderzhanie-norilskih-ulicz/" target="_blank" rel="noopener">Щебень 3–8 мм на дорогах, Таймырский телеграф</a></li>
+      <li><a href="https://sgnorilsk.ru/news/pochemu-v-noril-ske-granshlak-zamenili-na-otsev-bazal-ta" target="_blank" rel="noopener">Граншлак заменили базальтовым отсевом, Северный город</a></li>
+    </ul></div>
+    <div><h3>Нормативы</h3><ul>
+      <li><a href="https://meganorm.ru/mega_doc/norm/gost_gosudarstvennyj-standart/4/gost_9_402-2004_mezhgosudarstvennyy_standart_edinaya_sistema.html" target="_blank" rel="noopener">ГОСТ 9.402-2004, подготовка поверхностей к окрашиванию (действует)</a></li>
+    </ul></div>
+    <div><h3>Цены</h3><ul>
+      <li><a href="https://maps.yango.com/org/top_look/95031326322/" target="_blank" rel="noopener">Красноярск, Top look</a></li>
+      <li><a href="https://favorit-motors.ru/technical-center/worklist/detailing/okleika-avtomobilia/okleika-poliuretanovoi-plenkoi/" target="_blank" rel="noopener">Сеть техцентров, оклейка PPF</a></li>
+    </ul></div>
+  </div>
+</section>
+
+<footer>
+  <span>Учебный проект по дисциплине «Основы проектной деятельности». Заполярный государственный университет им. Н.М. Федоровского, Политехнический колледж, Норильск, 2026.</span>
+  <span>Сайт информационный. Сроки и условия работ уточняйте у производителя состава и в центре.</span>
+</footer>
+
+</main>
+
+</body></html>
