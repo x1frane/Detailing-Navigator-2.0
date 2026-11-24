@@ -585,42 +585,85 @@
 
     /* faq */
     details {
-      border-top: 1px solid var(--line)
+      border-top: 1px solid var(--line);
+      transition: background-color 0.18s ease;
     }
 
     details:last-child {
-      border-bottom: 1px solid var(--line)
+      border-bottom: 1px solid var(--line);
     }
 
     summary {
       cursor: pointer;
       font-weight: 600;
-      padding: .9rem 0;
+      padding: .95rem 0;
       list-style: none;
       display: flex;
       justify-content: space-between;
-      gap: 1rem
+      align-items: center;
+      gap: 1rem;
+      user-select: none;
+      transition: color 0.18s ease;
+    }
+
+    summary:hover {
+      color: var(--accent);
     }
 
     summary::-webkit-details-marker {
-      display: none
+      display: none;
     }
 
     summary::after {
       content: "+";
-      font-size: 1.3rem;
+      font-size: 1.45rem;
+      font-family: var(--font-body);
+      font-weight: 300;
       line-height: 1;
-      color: var(--accent)
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: transparent;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s, background-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    summary:hover::after {
+      background: var(--surface);
     }
 
     details[open] summary::after {
-      content: "−"
+      content: "+";
+      transform: rotate(45deg);
+      color: var(--ink);
+      background: var(--surface);
     }
 
     details p {
-      padding-bottom: 1rem;
+      padding-bottom: 1.15rem;
       color: var(--muted);
-      max-width: 42rem
+      max-width: 44rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @keyframes faqFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    details[open] p {
+      animation: faqFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     /* sources */
@@ -1374,18 +1417,343 @@
       border-color: var(--ink);
       font-weight: 600;
     }
+
+    /* ========================================================
+       ПОГОДНЫЙ ВИДЖЕТ И СОВЕТЫ ПО УХОДУ (#pogoda)
+       ======================================================== */
+    .weather-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 1.4rem;
+      display: grid;
+      gap: 1.25rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .weather-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: .9rem;
+    }
+
+    .weather-districts {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+    }
+
+    .dist-btn {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: .86rem;
+      padding: .4rem .85rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .15s;
+    }
+
+    .dist-btn:hover {
+      border-color: var(--muted);
+    }
+
+    .dist-btn.active {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Инфо-карточка текущей погоды */
+    .weather-card {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .weather-main-info {
+      display: grid;
+      gap: .45rem;
+      justify-items: start;
+    }
+
+    .weather-district-row {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .district-badge {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .condition-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .82rem;
+      font-family: var(--font-mono);
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .weather-temp-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      flex-wrap: wrap;
+    }
+
+    .weather-temp {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .weather-feels {
+      font-size: .95rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .weather-metrics {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .weather-metrics b {
+      color: var(--ink);
+    }
+
+    /* Лаконичная строка текущего статуса */
+    .weather-status-line {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: .92rem;
+      line-height: 1.4;
+      flex-wrap: wrap;
+    }
+
+    .status-tag {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: .15rem .5rem;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .weather-status-line[data-level="danger"] .status-tag {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    .weather-status-line[data-level="warning"] .status-tag {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+    }
+
+    .weather-status-line[data-level="safe"] .status-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+
+    .status-text {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Сетка 3 колонок советов */
+    .advisor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 1rem;
+    }
+
+    .adv-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1.1rem;
+      display: grid;
+      gap: .8rem;
+      align-content: start;
+    }
+
+    .adv-head h4 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-family: var(--font-display);
+      color: var(--ink);
+    }
+
+    .adv-danger .adv-head h4 {
+      color: #b91c1c;
+    }
+
+    .adv-action .adv-head h4 {
+      color: var(--ink);
+    }
+
+    .adv-coating .adv-head h4 {
+      color: var(--accent);
+    }
+
+    .adv-list {
+      margin: 0;
+      padding-left: 1.15rem;
+      display: grid;
+      gap: .6rem;
+      font-size: .88rem;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .adv-list li {
+      color: var(--ink);
+    }
+
+    /* Подвал виджета */
+    .weather-footer {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      padding-top: .6rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .w-btn-calc {
+      background: var(--ink);
+      color: var(--bg);
+      padding: .45rem .95rem;
+      border-radius: 4px;
+      font-size: .86rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+
+    .w-btn-calc:hover {
+      opacity: .88;
+      text-decoration: none;
+    }
+
+    .w-btn-centers {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: .45rem .95rem;
+      border-radius: 4px;
+      font-size: .86rem;
+      text-decoration: none;
+      transition: all .15s;
+    }
+
+    .w-btn-centers:hover {
+      border-color: var(--ink);
+      text-decoration: none;
+    }
+
+    /* ========================================================
+       АРКТИЧЕСКИЙ СНЕГ (#snow-canvas & .snow-toggle)
+       ======================================================== */
+    #snow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 35;
+      opacity: 0.85;
+      transition: opacity .35s ease;
+    }
+
+    #snow-canvas.snow-disabled {
+      opacity: 0;
+    }
+
+    .snow-toggle-btn {
+      margin-left: auto;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .78rem;
+      font-family: var(--font-mono);
+      padding: .2rem .6rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .38rem;
+      transition: all .15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .snow-toggle-btn:hover {
+      border-color: var(--muted);
+      color: var(--ink);
+    }
+
+    .snow-toggle-btn.active {
+      border-color: var(--ink);
+      color: var(--ink);
+      background: var(--surface);
+    }
+
+    .snow-toggle-indicator {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7E97AD;
+      box-shadow: 0 0 6px rgba(126, 151, 173, 0.6);
+      transition: all .15s;
+    }
+
+    .snow-toggle-btn:not(.active) .snow-toggle-indicator {
+      background: var(--line);
+      box-shadow: none;
+    }
   </style>
+
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
   <header class="nav">
     <div class="wrap">
       <a class="brand" href="#top">Детейлинг навигатор</a>
       <nav class="links" aria-label="Разделы">
+        <a href="#pogoda">Погода и уход</a>
         <a href="#calc">Калькулятор</a>
         <a href="#zashita">Способы защиты</a>
         <a href="#ceny">Цены</a>
         <a href="#centry">Центры Норильска</a>
         <a href="#faq">Вопросы</a>
       </nav>
+      <button type="button" class="snow-toggle-btn active" id="btn-toggle-snow" title="Включить или выключить снег">
+        <span class="snow-toggle-indicator"></span>
+        <span id="snow-btn-text">Снег: вкл</span>
+      </button>
     </div>
   </header>
 
@@ -1745,6 +2113,86 @@
       </div>
     </section>
 
+    <section id="pogoda">
+      <h2>Погода и советы по уходу</h2>
+
+      <div class="weather-box">
+        <!-- Выбор района -->
+        <div class="weather-toolbar">
+          <div class="weather-districts" role="tablist" aria-label="Районы Большого Норильска">
+            <button type="button" class="dist-btn active" data-district="norilsk">Норильск</button>
+            <button type="button" class="dist-btn" data-district="talnakh">Талнах</button>
+            <button type="button" class="dist-btn" data-district="kayerkan">Кайеркан</button>
+            <button type="button" class="dist-btn" data-district="oganer">Оганер</button>
+            <button type="button" class="dist-btn" data-district="dudinka">Дудинка</button>
+          </div>
+        </div>
+
+        <!-- Погода: температура, ветер, влажность (выровнено по левому краю) -->
+        <div class="weather-card">
+          <div class="weather-main-info">
+            <div class="weather-district-row">
+              <span class="district-badge" id="w-district-badge">Норильск</span>
+              <span class="condition-badge" id="w-condition">Загрузка...</span>
+            </div>
+            <div class="weather-temp-wrap">
+              <div class="weather-temp" id="w-temp">--°C</div>
+              <div class="weather-feels" id="w-feels">ощущается как --°C</div>
+            </div>
+            <div class="weather-metrics">
+              <span class="metric-item">Ветер: <b id="w-wind">-- м/с</b> <span id="w-gusts"></span></span>
+              <span class="metric-item">Влажность: <b id="w-humidity">--%</b></span>
+            </div>
+          </div>
+
+          <!-- Лаконичная строка статуса без нейро-рамок и эмодзи -->
+          <div class="weather-status-line" id="w-alert" data-level="warning">
+            <span class="status-tag" id="w-alert-tag">Внимание</span>
+            <span class="status-text" id="w-alert-title">Загрузка погодных данных...</span>
+          </div>
+        </div>
+
+        <!-- 3 карточки с понятными человеческими советами -->
+        <div class="advisor-grid">
+          <!-- Карточка 1 -->
+          <div class="adv-card adv-danger">
+            <div class="adv-head">
+              <h4>Чего делать не стоит</h4>
+            </div>
+            <ul class="adv-list" id="adv-avoid-list">
+              <li>Загрузка советов...</li>
+            </ul>
+          </div>
+
+          <!-- Карточка 2 -->
+          <div class="adv-card adv-action">
+            <div class="adv-head">
+              <h4>Как мыть и ухаживать</h4>
+            </div>
+            <ul class="adv-list" id="adv-action-list">
+              <li>Загрузка советов...</li>
+            </ul>
+          </div>
+
+          <!-- Карточка 3 -->
+          <div class="adv-card adv-coating">
+            <div class="adv-head">
+              <h4>Что с защитными покрытиями</h4>
+            </div>
+            <ul class="adv-list" id="adv-coating-list">
+              <li>Загрузка советов...</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Кнопки действий без стрелок -->
+        <div class="weather-footer">
+          <a href="#calc" class="w-btn-calc">Рассчитать стоимость защиты</a>
+          <a href="#centry" class="w-btn-centers">Смотреть центры Норильска</a>
+        </div>
+      </div>
+    </section>
+
     <section id="calc">
       <h2>Калькулятор стоимости</h2>
       <p class="lead">Рассчитайте предварительный бюджет на защиту кузова в зависимости от класса автомобиля, исходного
@@ -1866,8 +2314,8 @@
                 <span class="pkg-tag">Гидрофоб и блеск</span>
                 <span class="pkg-name">Нанокерамика (2–3 слоя)</span>
               </div>
-              <p class="pkg-desc">Послойная обработка керамикой. Глубокий зеркальный глянец, защита от солей, реагентов
-                и ультрафиолета, облегчение зимней мойки.</p>
+              <p class="pkg-desc">Послойная обработка керамикой. Глубокий зеркальный глянец, защита от дорожной копоти,
+                битума и ультрафиолета, облегчение зимней мойки.</p>
               <div class="pkg-benefit">Обратите внимание: от сколов дорожного щебня керамика не защищает</div>
             </button>
 
@@ -1898,7 +2346,8 @@
               <span class="addon-check"></span>
               <div class="addon-text">
                 <b>Антикоррозийная обработка днища и арок</b>
-                <span>Нанесение битумно-полимерной мастики для защиты металла от дорожного щебня и соли (+22 000 – 30
+                <span>Нанесение битумно-полимерной мастики для защиты металла от дорожного щебня, пескоструя и талой
+                  сырости (+22 000 – 30
                   000 ₽)</span>
               </div>
             </label>
@@ -2682,6 +3131,440 @@
 
       // Инициализация
       updateSlider(0);
+    })();
+
+    /* ========================================================
+       ПОГОДНЫЙ ВИДЖЕТ И СОВЕТЫ ПО УХОДУ (#pogoda)
+       ======================================================== */
+    (function () {
+      const DISTRICTS = {
+        norilsk: { name: 'Норильск', lat: 69.3498, lon: 88.2010 },
+        talnakh: { name: 'Талнах', lat: 69.4889, lon: 88.3972 },
+        kayerkan: { name: 'Кайеркан', lat: 69.3558, lon: 87.7553 },
+        oganer: { name: 'Оганер', lat: 69.3900, lon: 88.3000 },
+        dudinka: { name: 'Дудинка', lat: 69.4058, lon: 86.1778 }
+      };
+
+      let currentDistrict = 'norilsk';
+
+      // DOM элементы
+      const distBtns = document.querySelectorAll('.dist-btn');
+      const elTemp = document.getElementById('w-temp');
+      const elFeels = document.getElementById('w-feels');
+      const elDistrictBadge = document.getElementById('w-district-badge');
+      const elCondition = document.getElementById('w-condition');
+      const elWind = document.getElementById('w-wind');
+      const elGusts = document.getElementById('w-gusts');
+      const elHumidity = document.getElementById('w-humidity');
+
+      const elAlert = document.getElementById('w-alert');
+      const elAlertTag = document.getElementById('w-alert-tag');
+      const elAlertTitle = document.getElementById('w-alert-title');
+
+      const elAvoidList = document.getElementById('adv-avoid-list');
+      const elActionList = document.getElementById('adv-action-list');
+      const elCoatingList = document.getElementById('adv-coating-list');
+
+      function getConditionText(code) {
+        if (code === 0) return 'Ясно';
+        if (code === 1) return 'Преимущественно ясно';
+        if (code === 2) return 'Переменная облачность';
+        if (code === 3) return 'Пасмурно';
+        if (code === 45 || code === 48) return 'Туман, дымка';
+        if (code >= 51 && code <= 55) return 'Морось';
+        if (code >= 61 && code <= 65) return 'Снег с дождём';
+        if (code === 71 || code === 73) return 'Снегопад';
+        if (code === 75 || code === 77) return 'Метель';
+        if (code === 85 || code === 86) return 'Пурга, шквал';
+        if (code >= 80 && code <= 82) return 'Ливневый снег';
+        if (code >= 95) return 'Шторм, пурга';
+        return 'Зимняя погода';
+      }
+
+      function generateAdvice(temp, feels, wind, gusts, humidity, code) {
+        let level = 'safe';
+        let alertTag = 'Порядок';
+        let alertTitle = 'Умеренная северная погода: хороший момент для мойки кузова';
+
+        const avoid = [];
+        const action = [];
+        const coating = [];
+
+        // Базовый анализ температуры
+        if (temp <= -30 || feels <= -38) {
+          level = 'danger';
+          alertTag = 'Мороз';
+          alertTitle = 'Сильный мороз: кузов хрупкий, на мойке высокий риск микротрещин лака';
+
+          avoid.push('Не заезжайте с мороза сразу на мойку с горячей водой. От резкого перепада в 60–70 градусов лак трескается, особенно на пластиковых бамперах и зеркалах.');
+          avoid.push('Не скребите кузов пластиковым скребком. Снег на таком морозе твёрдый как камень, скребок моментально наделает глубоких царапин.');
+          avoid.push('Не выезжайте на улицу, пока тщательно не продуют замки и ручки, иначе двери прихватит за пару минут.');
+
+          action.push('Перед мойкой постойте в боксе хотя бы минут 15, чтобы кузов немного согрелся.');
+          action.push('Снег смахивайте только мягкой щёткой.');
+
+          coating.push('Полиуретановая плёнка на морозе дубеет. Мелкие царапины на ней сами сейчас не затянутся — для этого нужен прогрев феном от +50 °C в тепле.');
+          coating.push('Если недавно нанесли керамику (меньше двух недель назад), мыть кузов с химией и пеной нельзя.');
+        } else if (temp <= -15) {
+          level = 'danger';
+          alertTag = 'Мороз';
+          alertTitle = 'Зимний режим: двухфазная мойка и обязательная продувка замков';
+
+          avoid.push('Не трите сухой кузов тряпками или сухими салфетками: дорожная пыль и копоть работают как наждачка.');
+          avoid.push('Не оставляйте мокрыми тормоза после выезда из тепла на улицу.');
+
+          action.push('Мойте кузов в два этапа: сначала пена сбивает грязь, потом ручная мойка мягкой варежкой с нейтральным шампунем.');
+          action.push('Сразу после выезда плавно притормозите пару раз, чтобы просушить колодки и диски от влаги.');
+          action.push('Сбивайте налипшую ледяную кашу с арок и брызговиков, пока она не превратилась в тяжёлые глыбы.');
+
+          coating.push('Керамика в такую погоду отлично помогает: снежная каша и копоть к ней почти не липнут и смываются намного легче.');
+          coating.push('Полиуретановая плёнка надёжно держит удары летящих ледяных осколков и мелкого щебня.');
+        } else if (temp <= -5) {
+          level = 'safe';
+          alertTag = 'Порядок';
+          alertTitle = 'Умеренная зимняя погода: хороший день для мойки кузова';
+
+          avoid.push('Не мойте машину на открытых мойках: даже при −6 °C вода успеет замёрзнуть коркой прямо на краске.');
+
+          action.push('Хороший момент, чтобы смыть накопившийся налёт и дорожную грязь.');
+          action.push('После мойки можно нанести быстрый кварцевый состав или полимер, чтобы машина дольше оставалась чистой.');
+
+          coating.push('Полиуретановая плёнка на кузове эластична и полностью гасит удары щебня.');
+          coating.push('Керамика сохраняет глубокий блеск и облегчает сушку кузова.');
+        } else {
+          level = 'warning';
+          alertTag = 'Внимание';
+          alertTitle = 'Около нуля: на дорогах слякоть, риск коррозии на сколах';
+
+          avoid.push('Не оставляйте машину в грязной талой жиже: влага скапливается в микротрещинах и дренажах, ускоряя окисление оголённого металла.');
+          avoid.push('Не паркуйтесь в сырых закрытых гаражах без хорошей вентиляции.');
+
+          action.push('Обойдите машину и проверьте сколы: если где-то сбило краску до железа, подкрасьте или законсервируйте антикором, пока не пошли рыжики.');
+          action.push('Проверьте сливные отверстия внизу дверей и в порогах — талая вода не должна застаиваться внутри металла.');
+
+          coating.push('Проверьте подвороты полиуретановой плёнки по краям капота и дверей: они должны плотно прилегать, чтобы вода не подмывала клей.');
+          coating.push('Если на машине сделан антикор, убедитесь, что защитный состав в арках цел и не содран ледяными глыбами.');
+        }
+
+        // Корректировка при сильном ветре
+        if (wind >= 11 || gusts >= 17) {
+          level = 'danger';
+          alertTag = 'Шторм';
+          alertTitle = 'Сильный ветер: летит щебень на трассе, риск вывернуть двери';
+
+          avoid.unshift('На трассе до Кайеркана, Талнаха или Алыкеля держите дистанцию за машинами: базальтовый щебень 3–8 мм вылетает из-под колёс с огромной скоростью.');
+          avoid.push('Придерживайте двери обеими руками при выходе — сильный порыв ветра легко выворачивает петли.');
+
+          action.unshift('Не паркуйтесь вплотную к зданиям: при шквалах с крыш нередко срывает куски кровли и наледь.');
+
+          coating.unshift('Бампер, капот и фары принимают основной удар щебня. Сберечь краску в такую метель способна только прочная полиуретановая плёнка.');
+        }
+
+        return { level, alertTag, alertTitle, avoid, action, coating };
+      }
+
+      function renderUI(data) {
+        const d = DISTRICTS[data.district] || DISTRICTS.norilsk;
+
+        // Погодные метрики
+        elTemp.textContent = (data.temp > 0 ? '+' : '') + Math.round(data.temp) + ' °C';
+        elFeels.textContent = 'ощущается как ' + (data.feels > 0 ? '+' : '') + Math.round(data.feels) + ' °C';
+        elDistrictBadge.textContent = d.name;
+        elCondition.textContent = getConditionText(data.code);
+        elWind.textContent = Math.round(data.wind) + ' м/с';
+        elGusts.textContent = data.gusts ? '(порывы до ' + Math.round(data.gusts) + ' м/с)' : '';
+        elHumidity.textContent = Math.round(data.humidity) + '%';
+
+        // Формирование и вывод советов
+        const advice = generateAdvice(data.temp, data.feels, data.wind, data.gusts, data.humidity, data.code);
+
+        elAlert.setAttribute('data-level', advice.level);
+        elAlertTag.textContent = advice.alertTag;
+        elAlertTitle.textContent = advice.alertTitle;
+
+        // Вывод списков
+        elAvoidList.innerHTML = advice.avoid.map(item => `<li>${item}</li>`).join('');
+        elActionList.innerHTML = advice.action.map(item => `<li>${item}</li>`).join('');
+        elCoatingList.innerHTML = advice.coating.map(item => `<li>${item}</li>`).join('');
+      }
+
+      async function fetchLiveWeather(distKey) {
+        const d = DISTRICTS[distKey] || DISTRICTS.norilsk;
+        elCondition.textContent = 'Загрузка...';
+
+        try {
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_gusts_10m&wind_speed_unit=ms&timezone=auto`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('API status ' + res.status);
+          const json = await res.json();
+          const cur = json.current;
+
+          renderUI({
+            district: distKey,
+            temp: cur.temperature_2m,
+            feels: cur.apparent_temperature,
+            wind: cur.wind_speed_10m,
+            gusts: cur.wind_gusts_10m || cur.wind_speed_10m,
+            humidity: cur.relative_humidity_2m,
+            code: cur.weather_code
+          });
+        } catch (err) {
+          console.warn('Weather API failed, fallback to seasonal preset:', err);
+          renderUI({
+            district: distKey,
+            temp: -22,
+            feels: -30,
+            wind: 8,
+            gusts: 13,
+            humidity: 80,
+            code: 71
+          });
+        }
+      }
+
+      // Переключение районов
+      distBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          distBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentDistrict = btn.getAttribute('data-district') || 'norilsk';
+          fetchLiveWeather(currentDistrict);
+        });
+      });
+
+      // Инициализация
+      fetchLiveWeather(currentDistrict);
+    })();
+
+    /* ========================================================
+       АРКТИЧЕСКИЙ СНЕГ (Canvas Snowfall)
+       ======================================================== */
+    (function () {
+      const canvas = document.getElementById('snow-canvas');
+      const toggleBtn = document.getElementById('btn-toggle-snow');
+      const btnText = document.getElementById('snow-btn-text');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      let width = 0;
+      let height = 0;
+      let flakes = [];
+      let animId = null;
+      let isEnabled = localStorage.getItem('norilsk_snow') !== 'off';
+      let windBoost = 0;
+      let lastMouseX = null;
+
+      function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+        initFlakes();
+      }
+
+      function initFlakes() {
+        const count = Math.floor(Math.min(width / 14, 90));
+        flakes = [];
+        for (let i = 0; i < count; i++) {
+          const depth = Math.random();
+          flakes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: 0.6 + depth * 1.5,
+            depth: depth,
+            speedY: 0.5 + depth * 1.1,
+            speedX: 0.25 + depth * 0.45,
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpeed: 0.015 + Math.random() * 0.02,
+            alpha: 0.2 + depth * 0.55
+          });
+        }
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, width, height);
+
+        const isDark = !document.documentElement.getAttribute('data-theme') || document.documentElement.getAttribute('data-theme') === 'dark';
+        const baseColor = isDark ? '230, 240, 252' : '110, 130, 150';
+
+        windBoost *= 0.95;
+
+        for (let i = 0; i < flakes.length; i++) {
+          const f = flakes[i];
+          f.wobble += f.wobbleSpeed;
+
+          f.y += f.speedY;
+          f.x += f.speedX + Math.sin(f.wobble) * 0.35 + windBoost * f.depth;
+
+          if (f.y > height + 5) {
+            f.y = -5;
+            f.x = Math.random() * width;
+          }
+          if (f.x > width + 5) {
+            f.x = -5;
+          } else if (f.x < -5) {
+            f.x = width + 5;
+          }
+
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${baseColor}, ${f.alpha})`;
+          ctx.fill();
+        }
+
+        if (isEnabled) {
+          animId = requestAnimationFrame(update);
+        }
+      }
+
+      function startSnow() {
+        if (!animId) {
+          animId = requestAnimationFrame(update);
+        }
+        canvas.classList.remove('snow-disabled');
+        if (toggleBtn) {
+          toggleBtn.classList.add('active');
+          if (btnText) btnText.textContent = 'Снег: вкл';
+        }
+      }
+
+      function stopSnow() {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+        ctx.clearRect(0, 0, width, height);
+        canvas.classList.add('snow-disabled');
+        if (toggleBtn) {
+          toggleBtn.classList.remove('active');
+          if (btnText) btnText.textContent = 'Снег: выкл';
+        }
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          isEnabled = !isEnabled;
+          localStorage.setItem('norilsk_snow', isEnabled ? 'on' : 'off');
+          if (isEnabled) {
+            startSnow();
+          } else {
+            stopSnow();
+          }
+        });
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        if (lastMouseX !== null) {
+          const delta = (e.clientX - lastMouseX) * 0.02;
+          windBoost = Math.max(-1.5, Math.min(1.5, windBoost + delta));
+        }
+        lastMouseX = e.clientX;
+      }, { passive: true });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (animId) cancelAnimationFrame(animId);
+          animId = null;
+        } else if (isEnabled) {
+          startSnow();
+        }
+      });
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      if (isEnabled) {
+        startSnow();
+      } else {
+        stopSnow();
+      }
+    })();
+
+    /* ========================================================
+       ПЛАВНАЯ АНИМАЦИЯ АККОРДЕОНА (#faq)
+       ======================================================== */
+    (function () {
+      const detailsList = document.querySelectorAll('#faq details');
+      if (!detailsList.length) return;
+
+      class Accordion {
+        constructor(el) {
+          this.el = el;
+          this.summary = el.querySelector('summary');
+          this.content = el.querySelector('p');
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
+
+          if (!this.summary || !this.content) return;
+          this.summary.addEventListener('click', (e) => this.onClick(e));
+        }
+
+        onClick(e) {
+          e.preventDefault();
+          this.el.style.overflow = 'hidden';
+          if (this.isClosing || !this.el.open) {
+            this.open();
+          } else if (this.isExpanding || this.el.open) {
+            this.shrink();
+          }
+        }
+
+        shrink() {
+          this.isClosing = true;
+          const startHeight = `${this.el.offsetHeight}px`;
+          const endHeight = `${this.summary.offsetHeight}px`;
+
+          if (this.animation) this.animation.cancel();
+
+          this.animation = this.el.animate({
+            height: [startHeight, endHeight]
+          }, {
+            duration: 220,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          });
+
+          this.animation.onfinish = () => this.onAnimationFinish(false);
+          this.animation.oncancel = () => (this.isClosing = false);
+        }
+
+        open() {
+          this.el.style.height = `${this.el.offsetHeight}px`;
+          this.el.open = true;
+          window.requestAnimationFrame(() => this.expand());
+        }
+
+        expand() {
+          this.isExpanding = true;
+          const startHeight = `${this.el.offsetHeight}px`;
+          const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+
+          if (this.animation) this.animation.cancel();
+
+          this.animation = this.el.animate({
+            height: [startHeight, endHeight]
+          }, {
+            duration: 250,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          });
+
+          this.animation.onfinish = () => this.onAnimationFinish(true);
+          this.animation.oncancel = () => (this.isExpanding = false);
+        }
+
+        onAnimationFinish(open) {
+          this.el.open = open;
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
+          this.el.style.height = '';
+          this.el.style.overflow = '';
+        }
+      }
+
+      detailsList.forEach(el => new Accordion(el));
     })();
   </script>
 </body>
