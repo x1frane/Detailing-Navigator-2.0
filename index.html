@@ -699,40 +699,6 @@
       gap: .4rem
     }
 
-    @media (max-width:640px) {
-
-      .srow,
-      .axis {
-        grid-template-columns: 1fr
-      }
-
-      .srow .val {
-        text-align: left
-      }
-
-      .axis> :first-child,
-      .axis> :last-child {
-        display: none
-      }
-
-      .center dl {
-        grid-template-columns: 1fr;
-        gap: .1rem
-      }
-
-      .center dt {
-        margin-top: .4rem
-      }
-
-      .nav .wrap {
-        gap: .8rem
-      }
-
-      section {
-        padding-block: 2.2rem
-      }
-    }
-
     @media (prefers-reduced-motion:reduce) {
       html {
         scroll-behavior: auto
@@ -1734,6 +1700,389 @@
     .snow-toggle-btn:not(.active) .snow-toggle-indicator {
       background: var(--line);
       box-shadow: none;
+    }
+
+    /* ========================================================
+       ОПТИМИЗАЦИЯ ДЛЯ СМАРТФОНОВ И ПЛАНШЕТОВ (@media max-width: 680px)
+       ======================================================== */
+    @media (max-width: 680px) {
+      /* Базовые отступы и типографика */
+      html {
+        scroll-padding-top: 5.5rem;
+      }
+
+      body {
+        font-size: 1rem;
+        padding-left: max(14px, env(safe-area-inset-left, 0px));
+        padding-right: max(14px, env(safe-area-inset-right, 0px));
+      }
+
+      section {
+        padding-block: 2.2rem;
+      }
+
+      h1 {
+        font-size: clamp(1.85rem, 8vw, 2.6rem);
+        line-height: 1.15;
+      }
+
+      h2 {
+        font-size: 1.45rem;
+        line-height: 1.25;
+      }
+
+      .lead {
+        font-size: 1.05rem;
+        line-height: 1.5;
+      }
+
+      .hero {
+        padding-block: 2.2rem 1.6rem;
+        gap: 1.2rem;
+      }
+
+      .takeaways {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      /* Шапка навигации: 2 аккуратные строки для удобства пальцев */
+      .nav .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: .5rem;
+        padding-block: .55rem .4rem;
+      }
+
+      .nav .brand {
+        font-size: 1.02rem;
+      }
+
+      .snow-toggle-btn {
+        margin-left: auto;
+        padding: .25rem .55rem;
+        font-size: .76rem;
+      }
+
+      .nav .links {
+        width: 100%;
+        order: 3;
+        gap: .5rem;
+        padding-block: .3rem .15rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav .links a {
+        font-size: .84rem;
+        padding: .35rem .65rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        flex-shrink: 0;
+      }
+
+      /* Схема толщины слоев ЛКП */
+      .srow {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "name val"
+          "track track";
+        gap: .25rem .5rem;
+        padding-block: .4rem;
+      }
+
+      .srow .name {
+        grid-area: name;
+        font-size: .88rem;
+      }
+
+      .srow .val {
+        grid-area: val;
+        font-size: .82rem;
+        text-align: right;
+      }
+
+      .srow .track {
+        grid-area: track;
+        height: .95rem;
+      }
+
+      .axis {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .2rem;
+      }
+
+      .axis > :first-child,
+      .axis > :last-child {
+        display: none;
+      }
+
+      .axis .ticks {
+        font-size: .72rem;
+      }
+
+      /* Таблицы */
+      .scroll {
+        border-radius: 6px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      th, td {
+        padding: .65rem .75rem;
+        font-size: .88rem;
+      }
+
+      /* Калькулятор стоимости защиты (#calc) */
+      .calc-app {
+        gap: 1.6rem;
+      }
+
+      .step-head {
+        align-items: center;
+        gap: .65rem;
+      }
+
+      .step-num {
+        width: 1.65rem;
+        height: 1.65rem;
+        font-size: .82rem;
+      }
+
+      .step-head h3 {
+        font-size: 1.05rem;
+      }
+
+      .calc-grid-4 {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+      }
+
+      .calc-grid-3 {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+      }
+
+      .opt-card,
+      .pkg-card {
+        padding: .85rem .95rem;
+      }
+
+      .opt-title {
+        font-size: .95rem;
+      }
+
+      .opt-desc {
+        font-size: .82rem;
+      }
+
+      .pkg-name {
+        font-size: 1.02rem;
+      }
+
+      .pkg-desc {
+        font-size: .88rem;
+      }
+
+      .addon-item {
+        padding: .75rem .85rem;
+        min-height: 48px;
+      }
+
+      .calc-result {
+        padding: 1.1rem .95rem;
+        gap: 1.1rem;
+      }
+
+      .res-price {
+        font-size: 1.75rem;
+      }
+
+      .result-details {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .calc-btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 46px;
+        font-size: .95rem;
+      }
+
+      /* Слайдер детейлинг-центров (#centry) */
+      .slider-nav-top {
+        gap: .6rem;
+      }
+
+      .slider-counter {
+        font-size: .84rem;
+      }
+
+      .slider-counter b {
+        font-size: .92rem;
+      }
+
+      .slider-arrow {
+        width: 2.6rem;
+        height: 2.6rem;
+      }
+
+      .slide-media {
+        height: 190px;
+      }
+
+      .slide-media-badge {
+        top: .75rem;
+        left: .75rem;
+        gap: .4rem;
+      }
+
+      .badge-rating,
+      .badge-type {
+        font-size: .76rem;
+        padding: .25rem .5rem;
+      }
+
+      .slide-content {
+        padding: 1.1rem .95rem;
+        gap: 1rem;
+      }
+
+      .slide-title {
+        font-size: 1.25rem;
+      }
+
+      .slide-details-grid {
+        grid-template-columns: 1fr;
+        gap: .75rem;
+        font-size: .9rem;
+      }
+
+      .slide-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: .6rem;
+      }
+
+      .btn-call,
+      .btn-link {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .slider-dots {
+        gap: .35rem;
+      }
+
+      .slider-dot {
+        padding: .4rem .75rem;
+        font-size: .8rem;
+      }
+
+      /* Погодный советник (#pogoda) */
+      .weather-box {
+        padding: 1.1rem .95rem;
+        gap: 1.1rem;
+      }
+
+      .weather-toolbar {
+        padding-bottom: .75rem;
+      }
+
+      .weather-districts {
+        gap: .35rem;
+      }
+
+      .dist-btn {
+        padding: .4rem .7rem;
+        font-size: .82rem;
+        min-height: 36px;
+      }
+
+      .district-badge {
+        font-size: 1.3rem;
+      }
+
+      .weather-temp {
+        font-size: 2.4rem;
+      }
+
+      .weather-feels {
+        font-size: .88rem;
+      }
+
+      .weather-metrics {
+        gap: .6rem 1rem;
+        font-size: .84rem;
+      }
+
+      .weather-status-line {
+        padding: .65rem .8rem;
+        font-size: .86rem;
+        gap: .5rem;
+      }
+
+      .status-tag {
+        font-size: .74rem;
+      }
+
+      .advisor-grid {
+        grid-template-columns: 1fr;
+        gap: .85rem;
+      }
+
+      .adv-card {
+        padding: .95rem .9rem;
+        gap: .65rem;
+      }
+
+      .weather-footer {
+        flex-direction: column;
+        width: 100%;
+        gap: .6rem;
+      }
+
+      .w-btn-calc,
+      .w-btn-centers {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      /* Частые вопросы (#faq) */
+      summary {
+        padding: .85rem 0;
+        font-size: .95rem;
+        gap: .75rem;
+      }
+
+      summary::after {
+        width: 30px;
+        height: 30px;
+        font-size: 1.35rem;
+      }
+
+      details p {
+        font-size: .88rem;
+        line-height: 1.5;
+        padding-bottom: .95rem;
+      }
+
+      /* Подвал */
+      footer {
+        padding-top: 1.2rem;
+        font-size: .84rem;
+      }
     }
   </style>
 
