@@ -1,9 +1,12 @@
 <!doctype html>
-<html>
+<html lang="ru">
 
 <head>
-  <meta charset=utf8>
-  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Детейлинг навигатор</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <style>
     :root {
       color-scheme: light;
@@ -35,10 +38,6 @@
 </head>
 
 <body>
-  <title>Детейлинг навигатор</title>
-  <meta name="claude:viewport-fit-sides" content="cover">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
   <style>
     /* Documentary look: paper ground, serif headings, rules instead of boxes, one accent used for data only. */
     :root {
@@ -115,8 +114,6 @@
       background: var(--bg);
       color: var(--ink);
       font: 400 1.0625rem/1.6 var(--font-body);
-      padding-left: max(16px, env(safe-area-inset-left, 0px));
-      padding-right: max(16px, env(safe-area-inset-right, 0px));
       padding-block: 0 3rem;
       margin: 0
     }
@@ -131,8 +128,15 @@
     }
 
     .wrap {
-      max-width: 66rem;
-      margin: 0 auto
+      max-width: 68rem;
+      margin: 0 auto;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+
+    main.wrap {
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -188,13 +192,40 @@
       max-width: 46rem
     }
 
-    /* nav: plain text, no pills */
+    /* nav: iOS Liquid Glass full-width bar */
     .nav {
       position: sticky;
       top: env(safe-area-inset-top, 0px);
       z-index: 40;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line)
+      width: 100%;
+      background: linear-gradient(180deg, rgba(251, 249, 244, 0.72) 0%, rgba(244, 241, 234, 0.56) 100%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%) brightness(1.03);
+      backdrop-filter: blur(24px) saturate(190%) brightness(1.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.85),
+        inset 0 -1px 0 rgba(27, 30, 32, 0.06),
+        0 8px 28px rgba(27, 30, 32, 0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .nav {
+        background: linear-gradient(180deg, rgba(34, 38, 42, 0.62) 0%, rgba(22, 24, 26, 0.46) 100%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+          0 10px 32px rgba(0, 0, 0, 0.32);
+      }
+    }
+
+    :root[data-theme="dark"] .nav {
+      background: linear-gradient(180deg, rgba(34, 38, 42, 0.62) 0%, rgba(22, 24, 26, 0.46) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+        0 10px 32px rgba(0, 0, 0, 0.32);
     }
 
     .nav .wrap {
@@ -656,6 +687,7 @@
         opacity: 0;
         transform: translateY(-4px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1158,10 +1190,12 @@
       background: var(--surface);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       position: relative;
+      transition: height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .slider-track {
       display: flex;
+      align-items: flex-start;
       transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
       width: 100%;
       touch-action: pan-y pinch-zoom;
@@ -1281,6 +1315,10 @@
       gap: .25rem;
     }
 
+    .slide-prop:last-child {
+      grid-column: 1 / -1;
+    }
+
     .prop-label {
       font-size: .78rem;
       text-transform: uppercase;
@@ -1350,38 +1388,6 @@
     .btn-link:hover {
       border-color: var(--accent);
       text-decoration: none;
-    }
-
-    .slider-dots {
-      display: flex;
-      gap: .45rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding-top: .5rem;
-    }
-
-    .slider-dot {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .83rem;
-      padding: .35rem .85rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all .15s;
-    }
-
-    .slider-dot:hover {
-      border-color: var(--muted);
-      color: var(--ink);
-    }
-
-    .slider-dot.active {
-      background: var(--ink);
-      color: var(--bg);
-      border-color: var(--ink);
-      font-weight: 600;
     }
 
     /* ========================================================
@@ -1640,6 +1646,114 @@
     }
 
     /* ========================================================
+       СЕВЕРНОЕ СИЯНИЕ НА ФОНЕ (.aurora-bg)
+       ======================================================== */
+    .aurora-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .aurora-bg::before,
+    .aurora-bg::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      will-change: transform, opacity;
+    }
+
+    .aurora-bg::before {
+      top: -18%;
+      left: -12%;
+      width: 78vw;
+      height: 58vh;
+      background:
+        radial-gradient(ellipse at 32% 45%, rgba(62, 184, 148, 0.16) 0%, rgba(44, 138, 132, 0.08) 42%, transparent 72%),
+        radial-gradient(ellipse at 72% 30%, rgba(88, 138, 214, 0.12) 0%, transparent 65%);
+      animation: auroraFloatA 22s ease-in-out infinite alternate;
+    }
+
+    .aurora-bg::after {
+      bottom: -22%;
+      right: -14%;
+      width: 72vw;
+      height: 54vh;
+      background:
+        radial-gradient(ellipse at 65% 55%, rgba(98, 126, 206, 0.12) 0%, rgba(56, 152, 138, 0.06) 45%, transparent 72%),
+        radial-gradient(ellipse at 25% 70%, rgba(232, 144, 106, 0.07) 0%, transparent 65%);
+      animation: auroraFloatB 28s ease-in-out infinite alternate;
+    }
+
+    :root:not([data-theme="dark"]) .aurora-bg::before {
+      opacity: 0.72;
+      background:
+        radial-gradient(ellipse at 32% 45%, rgba(47, 138, 114, 0.10) 0%, rgba(78, 126, 156, 0.05) 45%, transparent 72%),
+        radial-gradient(ellipse at 72% 30%, rgba(92, 124, 178, 0.08) 0%, transparent 65%);
+    }
+
+    :root:not([data-theme="dark"]) .aurora-bg::after {
+      opacity: 0.65;
+      background:
+        radial-gradient(ellipse at 65% 55%, rgba(78, 126, 156, 0.08) 0%, rgba(47, 138, 114, 0.04) 45%, transparent 72%),
+        radial-gradient(ellipse at 25% 70%, rgba(154, 59, 27, 0.05) 0%, transparent 65%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .aurora-bg::before {
+        opacity: 1;
+        background:
+          radial-gradient(ellipse at 32% 45%, rgba(62, 184, 148, 0.16) 0%, rgba(44, 138, 132, 0.08) 42%, transparent 72%),
+          radial-gradient(ellipse at 72% 30%, rgba(88, 138, 214, 0.12) 0%, transparent 65%);
+      }
+
+      :root:not([data-theme="light"]) .aurora-bg::after {
+        opacity: 1;
+        background:
+          radial-gradient(ellipse at 65% 55%, rgba(98, 126, 206, 0.12) 0%, rgba(56, 152, 138, 0.06) 45%, transparent 72%),
+          radial-gradient(ellipse at 25% 70%, rgba(232, 144, 106, 0.07) 0%, transparent 65%);
+      }
+    }
+
+    @keyframes auroraFloatA {
+      0% {
+        transform: translate3d(-3%, -2%, 0) scale(1) rotate(-3deg);
+      }
+
+      50% {
+        transform: translate3d(5%, 3%, 0) scale(1.07) rotate(2deg);
+      }
+
+      100% {
+        transform: translate3d(9%, -1%, 0) scale(1.03) rotate(5deg);
+      }
+    }
+
+    @keyframes auroraFloatB {
+      0% {
+        transform: translate3d(3%, 2%, 0) scale(1) rotate(2deg);
+      }
+
+      50% {
+        transform: translate3d(-5%, -4%, 0) scale(1.08) rotate(-3deg);
+      }
+
+      100% {
+        transform: translate3d(-8%, 1%, 0) scale(1.02) rotate(-5deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .aurora-bg::before,
+      .aurora-bg::after {
+        animation: none;
+      }
+    }
+
+    /* ========================================================
        АРКТИЧЕСКИЙ СНЕГ (#snow-canvas & .snow-toggle)
        ======================================================== */
     #snow-canvas {
@@ -1706,6 +1820,7 @@
        ОПТИМИЗАЦИЯ ДЛЯ СМАРТФОНОВ И ПЛАНШЕТОВ (@media max-width: 680px)
        ======================================================== */
     @media (max-width: 680px) {
+
       /* Базовые отступы и типографика */
       html {
         scroll-padding-top: 5.5rem;
@@ -1713,6 +1828,9 @@
 
       body {
         font-size: 1rem;
+      }
+
+      .wrap {
         padding-left: max(14px, env(safe-area-inset-left, 0px));
         padding-right: max(14px, env(safe-area-inset-right, 0px));
       }
@@ -1778,10 +1896,19 @@
       .nav .links a {
         font-size: .84rem;
         padding: .35rem .65rem;
-        background: var(--surface);
-        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.45);
+        border: 1px solid rgba(27, 30, 32, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
         border-radius: 14px;
         flex-shrink: 0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .nav .links a {
+          background: rgba(255, 255, 255, 0.07);
+          border-color: rgba(255, 255, 255, 0.13);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        }
       }
 
       /* Схема толщины слоев ЛКП */
@@ -1817,8 +1944,8 @@
         gap: .2rem;
       }
 
-      .axis > :first-child,
-      .axis > :last-child {
+      .axis> :first-child,
+      .axis> :last-child {
         display: none;
       }
 
@@ -1832,7 +1959,8 @@
         -webkit-overflow-scrolling: touch;
       }
 
-      th, td {
+      th,
+      td {
         padding: .65rem .75rem;
         font-size: .88rem;
       }
@@ -1978,15 +2106,6 @@
         box-sizing: border-box;
       }
 
-      .slider-dots {
-        gap: .35rem;
-      }
-
-      .slider-dot {
-        padding: .4rem .75rem;
-        font-size: .8rem;
-      }
-
       /* Погодный советник (#pogoda) */
       .weather-box {
         padding: 1.1rem .95rem;
@@ -2086,6 +2205,7 @@
     }
   </style>
 
+  <div class="aurora-bg" aria-hidden="true"></div>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
   <header class="nav">
@@ -2116,8 +2236,8 @@
 
     <section id="lkp">
       <h2>Как устроено лакокрасочное покрытие</h2>
-      <p class="lead">Заводское покрытие состоит из пяти слоёв. Общая толщина обычно 80–180 мкм, у большинства массовых
-        машин около 100–120 мкм.</p>
+      <p class="lead">Заводское покрытие состоит из пяти слоёв. Общая толщина обычно 80-180 мкм, у большинства массовых
+        машин около 100-120 мкм.</p>
 
       <div class="scale" role="img"
         aria-label="Толщина слоёв лакокрасочных и защитных покрытий в микрометрах, в одном масштабе от 0 до 250 мкм">
@@ -2126,38 +2246,38 @@
           <div class="track">
             <i class="bar-base" style="width:16%;background:var(--l-clear)"></i>
             <i class="bar-range" style="left:16%;width:16%;background:var(--l-clear)"></i>
-          </div><span class="val">40–80</span>
+          </div><span class="val">40-80</span>
         </div>
         <div class="srow"><span class="name">Базовая эмаль</span>
           <div class="track">
             <i class="bar-base" style="width:4%;background:var(--l-base)"></i>
             <i class="bar-range" style="left:4%;width:6%;background:var(--l-base)"></i>
-          </div><span class="val">10–25</span>
+          </div><span class="val">10-25</span>
         </div>
         <div class="srow"><span class="name">Грунт-выравниватель</span>
           <div class="track">
             <i class="bar-base" style="width:12%;background:var(--l-primer)"></i>
             <i class="bar-range" style="left:12%;width:4%;background:var(--l-primer)"></i>
-          </div><span class="val">30–40</span>
+          </div><span class="val">30-40</span>
         </div>
         <div class="srow"><span class="name">Катафорезный грунт</span>
           <div class="track">
             <i class="bar-base" style="width:6%;background:var(--l-ed)"></i>
             <i class="bar-range" style="left:6%;width:4%;background:var(--l-ed)"></i>
-          </div><span class="val">15–25</span>
+          </div><span class="val">15-25</span>
         </div>
         <div class="sep"></div>
         <div class="srow"><span class="name">Керамика</span>
           <div class="track">
             <i class="bar-base" style="width:.4%;background:var(--l-ceramic)"></i>
             <i class="bar-range" style="left:.4%;width:.8%;background:var(--l-ceramic)"></i>
-          </div><span class="val">1–3</span>
+          </div><span class="val">1-3</span>
         </div>
         <div class="srow"><span class="name">Полиуретановая пленка</span>
           <div class="track">
             <i class="bar-base" style="width:60%;background:var(--l-ppf)"></i>
             <i class="bar-range" style="left:60%;width:20%;background:var(--l-ppf)"></i>
-          </div><span class="val">150–200</span>
+          </div><span class="val">150-200</span>
         </div>
         <div class="axis"><span></span>
           <div class="ticks">
@@ -2165,8 +2285,8 @@
           </div>
           <span></span>
         </div>
-        <p class="note">Толщины слоёв ориентировочные и зависят от производителя. Светлая часть полосы — толщина слоя от
-          нуля до минимума; более плотная — диапазон допуска (разброс толщин). Фосфатный слой на схеме не показан: это
+        <p class="note">Толщины слоёв ориентировочные и зависят от производителя. Светлая часть полосы -толщина слоя от
+          нуля до минимума; более плотная -диапазон допуска (разброс толщин). Фосфатный слой на схеме не показан: это
           тонкая плёнка, её измеряют массой на м².</p>
       </div>
 
@@ -2188,22 +2308,22 @@
             <tr>
               <td>Катафорезный грунт</td>
               <td>Наносится погружением в ванну под током, доходит до скрытых полостей, защищает от ржавчины</td>
-              <td class="num">15–25 мкм</td>
+              <td class="num">15-25 мкм</td>
             </tr>
             <tr>
               <td>Грунт-выравниватель</td>
               <td>Сглаживает микронеровности, создаёт основу под краску</td>
-              <td class="num">30–40 мкм</td>
+              <td class="num">30-40 мкм</td>
             </tr>
             <tr>
               <td>Базовая эмаль</td>
               <td>Даёт цвет, сама плохо защищена от износа и ультрафиолета</td>
-              <td class="num">10–25 мкм</td>
+              <td class="num">10-25 мкм</td>
             </tr>
             <tr>
               <td>Лак</td>
               <td>Защищает цвет от солнца и принимает на себя износ</td>
-              <td class="num">40–80 мкм, чаще 50–60</td>
+              <td class="num">40-80 мкм, чаще 50-60</td>
             </tr>
           </tbody>
         </table>
@@ -2254,7 +2374,7 @@
           <h3>Дороги</h3>
           <p>
             Дороги посыпают мелкозернистой фракцией базальтового отсева (3-8 мм), также используют щебень и гравий
-            (малая фракция 5–20 мм или 3–10 мм).
+            (малая фракция 5-20 мм или 3-10 мм).
             Граншлак несколько лет назад запретил применять Роспотребнадзор.
             Водители жаловались, что отлетающие камешки повреждают машины, а также возникали сомнения о его
             безопасности для окружающей среды.
@@ -2264,7 +2384,7 @@
           <h3>Промышленные выбросы</h3>
           <p>
             Диоксид серы исторически главная проблема воздуха Норильска.
-            «Норникель» заявляет о снижении выбросов на 45% к 2025–2026 годам относительно 2015 года.
+            «Норникель» заявляет о снижении выбросов на 45% к 2025-2026 годам относительно 2015 года.
             Кислотные осадки вызывают коррозию металлов.
             Известны случаи, когда пыль с цехов оседала на припаркованных машинах.
           </p>
@@ -2299,7 +2419,7 @@
             <tr>
               <td>Жидкое стекло</td>
               <td>Твёрдая плёнка, гидрофобность</td>
-              <td>До 1–1,5 лет</td>
+              <td>До 1-1,5 лет</td>
             </tr>
             <tr>
               <td>Керамика</td>
@@ -2314,12 +2434,12 @@
             <tr>
               <td>Виниловая плёнка</td>
               <td>Цвет, стиль, защита от лёгких потёртостей</td>
-              <td>1–2 года, на морозе дубеет и трескается от щебня</td>
+              <td>1-2 года, на морозе дубеет и трескается от щебня</td>
             </tr>
             <tr>
               <td>Антикор</td>
               <td>Защита от ржавчины скрытых полостей, днища, арок, порогов, стоек, лонжеронов</td>
-              <td>1–2 года для арок (сбивается щебнем), до 3–4 лет в полостях</td>
+              <td>1-2 года для арок (сбивается щебнем), до 3-4 лет в полостях</td>
             </tr>
           </tbody>
         </table>
@@ -2332,7 +2452,7 @@
     <section id="keramika">
       <h2>Керамика</h2>
       <p class="lead">Жидкий состав на основе диоксида кремния. После отверждения образует на лаке твёрдую
-        прозрачную плёнку около 1–3 мкм. Прочно удерживается на лаке.</p>
+        прозрачную плёнку около 1-3 мкм. Прочно удерживается на лаке.</p>
 
       <div class="two">
         <div class="block">
@@ -2341,36 +2461,23 @@
             <li>Кузов моют, очищают от вкраплений, при необходимости полируют и обезжиривают.</li>
             <li>Состав наносят небольшими участками аппликатором, через короткую выдержку располировывают микрофиброй.
             </li>
-            <li>Лучше всего наносить три слоя, это заметный рост блеска, а дополнительные слои долговечность не
+            <li>Лучше всего наносить три слоя -это заметно усиливает блеск, а дополнительные слои долговечность не
               повышают.</li>
           </ol>
         </div>
         <div class="block">
-          <h3>Отверждение</h3>
-          <ol>
-            <li><b>12–24 часа:</b> машина стоит в тёплом сухом боксе, к кузову нельзя прикасаться и допускать воду.</li>
-            <li><b>Первые 7 дней:</b> нельзя мыть и использовать химию.</li>
-            <li><b>7–14 дней:</b> первая мойка. Точный срок смотрите в инструкции производителя состава.</li>
-            <li>Дальше только мягкая мойка без жёстких щёток и агрессивной химии.</li>
-          </ol>
+          <h3>Отверждение и мороз</h3>
+          <p>Для кристаллизации состава первые 12-24 часа машина должна стоять в тёплом сухом боксе (режим мойки после
+            выезда - в разделе <a href="#uhod">«Уход за защитой»</a>).</p>
+          <p>Сама керамика на морозе не трескается: главный риск в холода - резкий перепад температуры, когда ледяной
+            кузов сразу обливают горячей водой (особенно на деталях после кузовного ремонта).</p>
         </div>
-      </div>
-
-      <div class="block">
-        <h3>Мороз и перепады температуры</h3>
-        <p>Главное запомнить: тёплая вода на сильном морозе может повредить сам лак, особенно после кузовного
-          ремонта.</p>
-        <ul>
-          <li>Не мойте машину тёплой водой сразу после мороза: сначала дайте кузову прогреться.</li>
-          <li>Не делайте резких перепадов температуры без необходимости.</li>
-          <li>Снег убирайте мягкой щёткой, а не пластиковым скребком.</li>
-        </ul>
       </div>
     </section>
 
     <section id="ppf">
       <h2>Полиуретановая плёнка</h2>
-      <p class="lead">Эластичная прозрачная плёнка толщиной 150–200 мкм. Гасит удары камней и песка, защищает лак от
+      <p class="lead">Эластичная прозрачная плёнка толщиной 150-200 мкм. Гасит удары камней и песка, защищает лак от
         химии и ультрафиолета.</p>
 
       <div class="two">
@@ -2378,7 +2485,7 @@
           <h3>Нанесение</h3>
           <ul>
             <li>Работают в чистом помещении без пыли.</li>
-            <li>Рабочая температура 18–25 °C.</li>
+            <li>Рабочая температура 18-25 °C.</li>
             <li>Плёнку кладут на мыльный раствор, выравнивают ракелем.</li>
             <li>Края подворачивают внутрь деталей, чтобы мойка высокого давления их не поддела.</li>
             <li>Окончательная адгезия набирается примерно за 24 часа.</li>
@@ -2388,7 +2495,7 @@
           <h3>Самовосстановление</h3>
           <ul>
             <li>Лёгкие царапины на верхнем слое затягиваются при нагреве.</li>
-            <li>Минимальная температура активации у большинства премиальных плёнок 49–60 °C, лучше всего работает 60–74
+            <li>Минимальная температура активации у большинства премиальных плёнок 49-60 °C, лучше всего работает 60-74
               °C.</li>
             <li>Ниже примерно 15 °C плёнка восстанавливается медленно, поэтому зимой нужен нагрев вручную: водой около
               60 °C или промышленным феном.</li>
@@ -2443,17 +2550,17 @@
         <div class="block">
           <h3>После керамики</h3>
           <ul>
-            <li><b>12–24 часа:</b> не прикасаться к кузову, не допускать воду.</li>
-            <li><b>7 дней:</b> не мыть, без химии.</li>
-            <li><b>7–14 дней:</b> первая мойка, срок по инструкции производителя.</li>
-            <li>Дальше мягкая мойка, без жёстких щёток и агрессивной химии.</li>
-            <li>Снег нужно убирать только мягкой щёткой.</li>
+            <li><b>12-24 часа:</b> выдержка в тёплом сухом боксе, не прикасаться к кузову и не допускать воду.</li>
+            <li><b>Первые 7 дней:</b> не мыть и не использовать автохимию.</li>
+            <li><b>7-14 дней:</b> первая мойка (точный срок смотрите в инструкции производителя).</li>
+            <li>Дальше - мягкая мойка без жёстких щёток и агрессивных составов; перед мойкой в мороз дать кузову
+              прогреться в боксе.</li>
           </ul>
         </div>
         <div class="block">
           <h3>После плёнки</h3>
           <ul>
-            <li><b>48–72 часа:</b> не мыть.</li>
+            <li><b>48-72 часа:</b> не мыть.</li>
             <li>Не направлять струю мойки высокого давления на края и швы.</li>
             <li>Мягкий шампунь с нейтральным pH и мягкие мочалки.</li>
             <li>Керамику можно наносить поверх плёнки, чтобы её было проще мыть.</li>
@@ -2604,14 +2711,14 @@
             </button>
             <button type="button" class="opt-card" data-condition="used">
               <span class="opt-title">С пробегом (паутинка)</span>
-              <span class="opt-desc">Риски от щеток и зимних моек. Мягкая восстановительная полировка кузова в 1–2
+              <span class="opt-desc">Риски от щеток и зимних моек. Мягкая восстановительная полировка кузова в 1-2
                 шага</span>
-              <span class="opt-price">+12 000 – 16 000 ₽</span>
+              <span class="opt-price">от +12 000 ₽ (зависит от класса)</span>
             </button>
             <button type="button" class="opt-card" data-condition="rough">
               <span class="opt-title">Сильный износ</span>
               <span class="opt-desc">Матовость, глубокие риски. Глубокая восстановительная абразивная полировка</span>
-              <span class="opt-price">+20 000 – 28 000 ₽</span>
+              <span class="opt-price">от +20 000 ₽ (зависит от класса)</span>
             </button>
           </div>
           <p class="note"><b>Обратите внимание:</b> если на кузове есть сколы до грунта или металла, плёнка и керамика
@@ -2643,7 +2750,7 @@
                 <span class="pkg-tag">Антигравийная броня</span>
                 <span class="pkg-name">Пакет «Зоны риска»</span>
               </div>
-              <p class="pkg-desc">Оклейка ударной части кузова полиуретановой плёнкой 150–200 мкм (передний бампер,
+              <p class="pkg-desc">Оклейка ударной части кузова полиуретановой плёнкой 150-200 мкм (передний бампер,
                 капот целиком, передняя оптика, зеркала, полоса над лобовым стеклом, зоны под ручками).</p>
               <div class="pkg-benefit">Принимает на себя удары дорожного щебня, царапины затягиваются при нагреве</div>
             </button>
@@ -2653,7 +2760,7 @@
                 <span class="pkg-tag">Максимальная защита</span>
                 <span class="pkg-name">Полная оклейка кузова полиуретановой пленкой</span>
               </div>
-              <p class="pkg-desc">100% окрашенных элементов кузова оклеиваются полиуретановой плёнкой толщиной 150–200
+              <p class="pkg-desc">100% окрашенных элементов кузова оклеиваются полиуретановой плёнкой толщиной 150-200
                 мкм. Абсолютная консервация заводского лака от сколов и пескоструя.</p>
               <div class="pkg-benefit">Кузов полностью защищён на 5+ лет в первозданном виде</div>
             </button>
@@ -2661,7 +2768,7 @@
             <button type="button" class="pkg-card" data-package="ceramic">
               <div class="pkg-top">
                 <span class="pkg-tag">Гидрофоб и блеск</span>
-                <span class="pkg-name">Нанокерамика (2–3 слоя)</span>
+                <span class="pkg-name">Нанокерамика (2-3 слоя)</span>
               </div>
               <p class="pkg-desc">Послойная обработка керамикой. Глубокий зеркальный глянец, защита от дорожной копоти,
                 битума и ультрафиолета, облегчение зимней мойки.</p>
@@ -2674,7 +2781,7 @@
                 <span class="pkg-name">Твёрдый воск (карнауба / полимер)</span>
               </div>
               <p class="pkg-desc">Нанесение твердого воска или полимерного силанта. Формирует жертвенный гидрофобный
-                микрослой на 1–2 месяца.</p>
+                микрослой на 1-2 месяца.</p>
               <div class="pkg-benefit">Экономичный вариант для сезонного блеска и защиты от легкой грязи</div>
             </button>
           </div>
@@ -2696,7 +2803,7 @@
               <div class="addon-text">
                 <b>Антикоррозийная обработка днища и арок</b>
                 <span>Нанесение битумно-полимерной мастики для защиты металла от дорожного щебня, пескоструя и талой
-                  сырости (+22 000 – 30
+                  сырости (+22 000 - 30
                   000 ₽)</span>
               </div>
             </label>
@@ -2706,7 +2813,7 @@
               <div class="addon-text">
                 <b id="add-headlights-title">Бронирование фар и туманок полиуретаном</b>
                 <span id="add-headlights-desc">Защищает стекло и поликарбонат фар от пескоструя, сколов и помутнения (+7
-                  000 – 9 000 ₽)</span>
+                  000 - 9 000 ₽)</span>
               </div>
             </label>
             <label class="addon-item" id="addon-label-rain">
@@ -2714,7 +2821,7 @@
               <span class="addon-check"></span>
               <div class="addon-text">
                 <b>Антидождь на переднюю полусферу стёкол</b>
-                <span>Капли и мокрый снег слетают на скорости от 50 км/ч, существенно легче счищать наледь (+3 500 – 5
+                <span>Капли и мокрый снег слетают на скорости от 50 км/ч, существенно легче счищать наледь (+3 500 - 5
                   000 ₽)</span>
               </div>
             </label>
@@ -2726,7 +2833,7 @@
           <div class="result-header">
             <div>
               <span class="res-label">Предварительный расчёт:</span>
-              <div class="res-price"><span id="res-price-val">85 000 – 125 000</span> <span class="res-curr">₽</span>
+              <div class="res-price"><span id="res-price-val">85 000 - 125 000</span> <span class="res-curr">₽</span>
               </div>
             </div>
           </div>
@@ -2742,7 +2849,7 @@
             </div>
             <div class="res-col">
               <b>Регламент и сроки:</b>
-              <p id="res-time">Примерно <b>2–3 дня</b> в тёплом боксе детейлинга с сушкой.</p>
+              <p id="res-time">Примерно <b>2-3 дня</b> в тёплом боксе детейлинга с сушкой.</p>
               <p id="res-care" class="res-care-note"><b>Правило после выезда:</b> Первые 7 дней нельзя мыть кузов с
                 химией (идёт кристаллизация керамики); струю высокого давления не направлять на кромки плёнки.</p>
             </div>
@@ -2772,7 +2879,7 @@
           <tbody>
             <tr>
               <td>Оклейка полиуретаном, полный кузов</td>
-              <td class="num">149 000 – 240 000 ₽</td>
+              <td class="num">149 000 - 240 000 ₽</td>
               <td>Сеть техцентров, цена зависит от модели</td>
               <td class="num">31.10.2026</td>
             </tr>
@@ -2813,7 +2920,7 @@
         <!-- Верхняя панель слайдера: счётчик и кнопки со стрелками -->
         <div class="slider-nav-top">
           <div class="slider-counter">
-            <span id="slide-num">1</span> из 5: <b id="slide-name">Carstyle</b>
+            <span id="slide-num">1</span> из 4: <b id="slide-name">Carstyle</b>
           </div>
           <div class="slider-controls">
             <button type="button" class="slider-arrow" id="slide-prev" aria-label="Предыдущий центр">
@@ -2863,7 +2970,7 @@
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Режим работы</span>
-                    <span class="prop-val">Ежедневно 10:00–20:00, по предварительной записи</span>
+                    <span class="prop-val">Ежедневно 10:00-20:00, по предварительной записи</span>
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Телефон</span>
@@ -2914,7 +3021,7 @@
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Телефон</span>
-                    <span class="prop-val"><a href="tel:+790255244523">+7 (902) 552-44-523</a></span>
+                    <span class="prop-val"><a href="tel:+79025524452">+7 (902) 552-44-523</a></span>
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Защитные покрытия</span>
@@ -2923,7 +3030,7 @@
                   </div>
                 </div>
                 <div class="slide-actions">
-                  <a href="tel:+790255244523" class="btn-call">Позвонить</a>
+                  <a href="tel:+79025524452" class="btn-call">Позвонить</a>
                   <a href="https://2gis.ru/norilsk/firm/70000001079657806" target="_blank" rel="noopener"
                     class="btn-link">Карточка в 2ГИС ↗</a>
                 </div>
@@ -2958,7 +3065,7 @@
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Режим работы</span>
-                    <span class="prop-val">По предварительной записи, Пн-Сб 10:00–22:00 Вс 12:00–18:00</span>
+                    <span class="prop-val">По предварительной записи, Пн-Сб 10:00-22:00 Вс 12:00-18:00</span>
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Телефон</span>
@@ -2977,7 +3084,7 @@
               </div>
             </article>
 
-            <!-- Слайд 4: АвтоБлеск -->
+            <!-- Слайд 4: Ceramics 24 -->
             <article class="slider-slide" data-name="Ceramics 24">
               <div class="slide-media">
                 <img src="images/ceramics24.jpg" alt="Ceramics_24 Норильск - нанесение пленки" loading="lazy">
@@ -3002,7 +3109,7 @@
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Режим работы</span>
-                    <span class="prop-val">Ежедневно 11:00–20:00</span>
+                    <span class="prop-val">Ежедневно 11:00-20:00</span>
                   </div>
                   <div class="slide-prop">
                     <span class="prop-label">Контакты</span>
@@ -3016,54 +3123,7 @@
                 <div class="slide-actions">
                   <a href="tel:+79198280909" class="btn-call">Позвонить</a>
                   <a href="https://2gis.ru/norilsk/search/ceramics/firm/70000001100578358" target="_blank"
-                    rel="noopener" class="btn-link">Карточка Ceramics_24 в 2ГИС ↗</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Слайд 5: Горыныч -->
-            <article class="slider-slide" data-name="Горыныч">
-              <div class="slide-media">
-                <img src="images/gorynych.jpg" alt="Горыныч Норильск - автосервис кузовной ремонт" loading="lazy">
-                <div class="slide-media-badge">
-                  <span class="badge-rating">★ 4,7 (115 оценок 2ГИС)</span>
-                  <span class="badge-type">Автосервис</span>
-                </div>
-              </div>
-              <div class="slide-content">
-                <div class="slide-header">
-                  <h3 class="slide-title">Горыныч</h3>
-                  <div class="slide-tags">
-                    <span class="slide-tag">Геометрия</span>
-                    <span class="slide-tag">Покраска деталей</span>
-                    <span class="slide-tag">Полировка</span>
-                    <span class="slide-tag">Ремонт вмятин</span>
-                    <span class="slide-tag">Сварка</span>
-                  </div>
-                </div>
-                <div class="slide-details-grid">
-                  <div class="slide-prop">
-                    <span class="prop-label">Адрес</span>
-                    <span class="prop-val">Энергетическая улица, 23в</span>
-                  </div>
-                  <div class="slide-prop">
-                    <span class="prop-label">Режим работы</span>
-                    <span class="prop-val">Пн-Вс 07:00–19:00</span>
-                  </div>
-                  <div class="slide-prop">
-                    <span class="prop-label">Телефон</span>
-                    <span class="prop-val"><a href="tel:+73919381258">+7 (3919) 38-12-58</a></span>
-                  </div>
-                  <div class="slide-prop">
-                    <span class="prop-label">Специфика</span>
-                    <span class="prop-val">Слесарный и кузовной ремонт, покраска и полировка кузова. Защитных покрытий
-                      нет.</span>
-                  </div>
-                </div>
-                <div class="slide-actions">
-                  <a href="tel:+73919381258" class="btn-call">Позвонить</a>
-                  <a href="https://2gis.ru/norilsk/firm/70000001100836767" target="_blank" rel="noopener"
-                    class="btn-link">Карточка Ceramics_24 в 2ГИС ↗</a>
+                    rel="noopener" class="btn-link">Карточка в 2ГИС ↗</a>
                 </div>
               </div>
             </article>
@@ -3090,7 +3150,7 @@
         </details>
         <details>
           <summary>Когда можно мыть после плёнки?</summary>
-          <p>Не раньше чем через 48–72 часа, и не направляйте струю на края.</p>
+          <p>Не раньше чем через 48-72 часа, и не направляйте струю на края.</p>
         </details>
         <details>
           <summary>Самовосстановится ли плёнка на морозе?</summary>
@@ -3131,7 +3191,7 @@
             days: 0
           },
           used: {
-            name: 'Подготовка: Мягкая полировка (1–2 шага)',
+            name: 'Подготовка: Мягкая полировка (1-2 шага)',
             min: 12000,
             max: 16000,
             days: 1
@@ -3150,7 +3210,7 @@
             max: 125000,
             days: 2.5,
             includesHeadlights: true,
-            care: 'Первые 7 дней нельзя мыть кузов с химией (идёт кристаллизация керамики); струю высокого давления не направлять на кромки плёнки (48–72 ч).'
+            care: 'Первые 7 дней нельзя мыть кузов с химией (идёт кристаллизация керамики); струю высокого давления не направлять на кромки плёнки (48-72 ч).'
           },
           ppf_front: {
             name: 'Пакет «Зоны риска полиуретан» (капот, бампер, оптика, зеркала, полоса)',
@@ -3158,10 +3218,10 @@
             max: 95000,
             days: 2,
             includesHeadlights: true,
-            care: 'Не мыть автомобиль 48–72 часа после оклейки; избегать направления струи высокого давления ближе 40 см к краям деталей.'
+            care: 'Не мыть автомобиль 48-72 часа после оклейки; избегать направления струи высокого давления ближе 40 см к краям деталей.'
           },
           ppf_full: {
-            name: 'Полная оклейка кузова полиуретаном (150–200 мкм)',
+            name: 'Полная оклейка кузова полиуретаном (150-200 мкм)',
             min: 160000,
             max: 240000,
             days: 4,
@@ -3169,12 +3229,12 @@
             care: 'Не мыть первые 72 часа; клеевой слой набирает полную адгезию за 14 дней.'
           },
           ceramic: {
-            name: 'Нанокерамика 2–3 слоя (глянец + гидрофоб + защита от химии)',
+            name: 'Нанокерамика 2-3 слоя (глянец + гидрофоб + защита от химии)',
             min: 35000,
             max: 50000,
             days: 2,
             includesHeadlights: false,
-            care: 'Первые 12–24 часа выдержка в сухом тёплом боксе. Первые 7–14 дней запрещена мойка со щелочными шампунями!'
+            care: 'Первые 12-24 часа выдержка в сухом тёплом боксе. Первые 7-14 дней запрещена мойка со щелочными шампунями!'
           },
           wax: {
             name: 'Твёрдый воск (карнаубский или полимерный силант)',
@@ -3182,7 +3242,7 @@
             max: 8000,
             days: 0.5,
             includesHeadlights: false,
-            care: 'Бережная бесконтактная мойка с нейтральным pH для продления гидрофобного эффекта на 1–2 месяца.'
+            care: 'Бережная бесконтактная мойка с нейтральным pH для продления гидрофобного эффекта на 1-2 месяца.'
           }
         },
         addons: {
@@ -3263,7 +3323,7 @@
           addHeadlights.disabled = false;
           headlightsLabel.classList.remove('disabled');
           headlightsTitle.textContent = 'Бронирование фар и туманок полиуретаном';
-          headlightsDesc.textContent = 'Защищает стекло и поликарбонат фар от пескоструя, сколов и помутнения (+7 000 – 9 000 ₽)';
+          headlightsDesc.textContent = 'Защищает стекло и поликарбонат фар от пескоструя, сколов и помутнения (+7 000 - 9 000 ₽)';
         }
 
         // Расчет стоимости
@@ -3309,7 +3369,7 @@
         const roundedMax = formatNumber(maxTotal);
 
         // Обновляем DOM
-        priceValEl.textContent = `${formatPrice(roundedMin)} – ${formatPrice(roundedMax)}`;
+        priceValEl.textContent = `${formatPrice(roundedMin)} - ${formatPrice(roundedMax)}`;
 
         // Список элементов
         itemsListEl.innerHTML = '';
@@ -3320,7 +3380,7 @@
         });
 
         // Сроки
-        const daysDisplay = totalDays <= 1 ? '1 день' : `${Math.ceil(totalDays - 0.5)}–${Math.ceil(totalDays + 0.5)} дня`;
+        const daysDisplay = totalDays <= 1 ? '1 день' : `${Math.ceil(totalDays - 0.5)}-${Math.ceil(totalDays + 0.5)} дня`;
         timeEl.innerHTML = `Примерно <b>${daysDisplay}</b> в тёплом боксе детейлинга с сушкой.`;
 
         // Памятка по выезду
@@ -3386,12 +3446,16 @@
       const nextBtn = document.getElementById('slide-next');
       const numEl = document.getElementById('slide-num');
       const nameEl = document.getElementById('slide-name');
-      const dots = document.querySelectorAll('.slider-dot');
 
       if (!track || slides.length === 0) return;
 
       let currentIndex = 0;
       const totalSlides = slides.length;
+
+      function syncHeight() {
+        if (!viewport || !slides[currentIndex]) return;
+        viewport.style.height = slides[currentIndex].offsetHeight + 'px';
+      }
 
       function updateSlider(index) {
         if (index < 0) {
@@ -3402,22 +3466,14 @@
           currentIndex = index;
         }
 
-        // Плавная анимация сдвига
+        // Плавная анимация сдвига и подстройка высоты под текущий слайд
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        syncHeight();
 
         // Обновление счетчика и имени
         if (numEl) numEl.textContent = currentIndex + 1;
         const activeSlideName = slides[currentIndex].getAttribute('data-name');
         if (nameEl) nameEl.textContent = activeSlideName;
-
-        // Обновление кнопок-точек
-        dots.forEach(function (dot, i) {
-          if (i === currentIndex) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
-          }
-        });
       }
 
       // Кнопки стрелок
@@ -3432,16 +3488,6 @@
           updateSlider(currentIndex + 1);
         });
       }
-
-      // Клик по точкам / вкладкам
-      dots.forEach(function (dot) {
-        dot.addEventListener('click', function () {
-          const idx = parseInt(dot.getAttribute('data-index'), 10);
-          if (!isNaN(idx)) {
-            updateSlider(idx);
-          }
-        });
-      });
 
       // Поддержка свайпа на смартфонах
       let touchStartX = 0;
@@ -3477,6 +3523,11 @@
           }
         }
       });
+
+      window.addEventListener('resize', syncHeight);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncHeight);
+      }
 
       // Инициализация
       updateSlider(0);
@@ -3545,14 +3596,14 @@
           alertTag = 'Мороз';
           alertTitle = 'Сильный мороз: кузов хрупкий, на мойке высокий риск микротрещин лака';
 
-          avoid.push('Не заезжайте с мороза сразу на мойку с горячей водой. От резкого перепада в 60–70 градусов лак трескается, особенно на пластиковых бамперах и зеркалах.');
+          avoid.push('Не заезжайте с мороза сразу на мойку с горячей водой. От резкого перепада в 60-70 градусов лак трескается, особенно на пластиковых бамперах и зеркалах.');
           avoid.push('Не скребите кузов пластиковым скребком. Снег на таком морозе твёрдый как камень, скребок моментально наделает глубоких царапин.');
           avoid.push('Не выезжайте на улицу, пока тщательно не продуют замки и ручки, иначе двери прихватит за пару минут.');
 
           action.push('Перед мойкой постойте в боксе хотя бы минут 15, чтобы кузов немного согрелся.');
           action.push('Снег смахивайте только мягкой щёткой.');
 
-          coating.push('Полиуретановая плёнка на морозе дубеет. Мелкие царапины на ней сами сейчас не затянутся — для этого нужен прогрев феном от +50 °C в тепле.');
+          coating.push('Полиуретановая плёнка на морозе дубеет. Мелкие царапины на ней сами сейчас не затянутся - для этого нужен прогрев феном от +50 °C в тепле.');
           coating.push('Если недавно нанесли керамику (меньше двух недель назад), мыть кузов с химией и пеной нельзя.');
         } else if (temp <= -15) {
           level = 'danger';
@@ -3589,7 +3640,7 @@
           avoid.push('Не паркуйтесь в сырых закрытых гаражах без хорошей вентиляции.');
 
           action.push('Обойдите машину и проверьте сколы: если где-то сбило краску до железа, подкрасьте или законсервируйте антикором, пока не пошли рыжики.');
-          action.push('Проверьте сливные отверстия внизу дверей и в порогах — талая вода не должна застаиваться внутри металла.');
+          action.push('Проверьте сливные отверстия внизу дверей и в порогах - талая вода не должна застаиваться внутри металла.');
 
           coating.push('Проверьте подвороты полиуретановой плёнки по краям капота и дверей: они должны плотно прилегать, чтобы вода не подмывала клей.');
           coating.push('Если на машине сделан антикор, убедитесь, что защитный состав в арках цел и не содран ледяными глыбами.');
@@ -3601,8 +3652,8 @@
           alertTag = 'Шторм';
           alertTitle = 'Сильный ветер: летит щебень на трассе, риск вывернуть двери';
 
-          avoid.unshift('На трассе до Кайеркана, Талнаха или Алыкеля держите дистанцию за машинами: базальтовый щебень 3–8 мм вылетает из-под колёс с огромной скоростью.');
-          avoid.push('Придерживайте двери обеими руками при выходе — сильный порыв ветра легко выворачивает петли.');
+          avoid.unshift('На трассе до Кайеркана, Талнаха или Алыкеля держите дистанцию за машинами: базальтовый щебень 3-8 мм вылетает из-под колёс с огромной скоростью.');
+          avoid.push('Придерживайте двери обеими руками при выходе -сильный порыв ветра легко выворачивает петли.');
 
           action.unshift('Не паркуйтесь вплотную к зданиям: при шквалах с крыш нередко срывает куски кровли и наледь.');
 
@@ -3637,15 +3688,24 @@
         elCoatingList.innerHTML = advice.coating.map(item => `<li>${item}</li>`).join('');
       }
 
+      let weatherAbortController = null;
+
       async function fetchLiveWeather(distKey) {
         const d = DISTRICTS[distKey] || DISTRICTS.norilsk;
+        if (weatherAbortController) {
+          weatherAbortController.abort();
+        }
+        weatherAbortController = new AbortController();
+        const controller = weatherAbortController;
+
         elCondition.textContent = 'Загрузка...';
 
         try {
           const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_gusts_10m&wind_speed_unit=ms&timezone=auto`;
-          const res = await fetch(url);
+          const res = await fetch(url, { signal: controller.signal });
           if (!res.ok) throw new Error('API status ' + res.status);
           const json = await res.json();
+          if (distKey !== currentDistrict) return;
           const cur = json.current;
 
           renderUI({
@@ -3658,6 +3718,7 @@
             code: cur.weather_code
           });
         } catch (err) {
+          if (err.name === 'AbortError' || distKey !== currentDistrict) return;
           console.warn('Weather API failed, fallback to seasonal preset:', err);
           renderUI({
             district: distKey,
@@ -3700,8 +3761,37 @@
       let flakes = [];
       let animId = null;
       let isEnabled = localStorage.getItem('norilsk_snow') !== 'off';
-      let windBoost = 0;
+      let mouseWind = 0;
       let lastMouseX = null;
+      let lastTime = 0;
+
+      // Автономные порывы норильского ветра
+      let gustActive = false;
+      let gustTimer = 1.0; // первый порыв вскоре после открытия
+      let gustElapsed = 0;
+      let gustDuration = 3.2;
+      let gustPeak = 13.5;
+      let gustDir = 1;
+
+      function isDarkTheme() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') return true;
+        if (theme === 'light') return false;
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      function scheduleNextGust() {
+        gustActive = false;
+        gustTimer = 3.2 + Math.random() * 4.8; // пауза 3.2–8.0 секунд
+      }
+
+      function startGust() {
+        gustActive = true;
+        gustElapsed = 0;
+        gustDuration = 2.6 + Math.random() * 2.2; // длительность 2.6–4.8 сек
+        gustPeak = 11.5 + Math.random() * 7.5;    // сильный норильский шквал 11.5–19.0
+        gustDir = Math.random() < 0.8 ? 1 : -1;   // преобладающее направление
+      }
 
       function resize() {
         const dpr = window.devicePixelRatio || 1;
@@ -3709,58 +3799,110 @@
         height = window.innerHeight;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
-        ctx.scale(dpr, dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         initFlakes();
       }
 
       function initFlakes() {
-        const count = Math.floor(Math.min(width / 14, 90));
+        const count = Math.floor(Math.min(width / 13, 95));
         flakes = [];
         for (let i = 0; i < count; i++) {
           const depth = Math.random();
           flakes.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            r: 0.6 + depth * 1.5,
+            r: 0.65 + depth * 1.45,
             depth: depth,
-            speedY: 0.5 + depth * 1.1,
-            speedX: 0.25 + depth * 0.45,
+            speedY: 0.7 + depth * 1.35,
+            speedX: 0.6 + depth * 1.1,
             wobble: Math.random() * Math.PI * 2,
-            wobbleSpeed: 0.015 + Math.random() * 0.02,
-            alpha: 0.2 + depth * 0.55
+            wobbleSpeed: 0.018 + Math.random() * 0.025,
+            alpha: 0.22 + depth * 0.55
           });
         }
       }
 
-      function update() {
+      function update(now) {
+        if (!lastTime) lastTime = now;
+        const dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
+        const frameScale = dt * 60;
+
         ctx.clearRect(0, 0, width, height);
 
-        const isDark = !document.documentElement.getAttribute('data-theme') || document.documentElement.getAttribute('data-theme') === 'dark';
-        const baseColor = isDark ? '230, 240, 252' : '110, 130, 150';
+        const baseColor = isDarkTheme() ? '230, 240, 252' : '102, 122, 144';
 
-        windBoost *= 0.95;
+        // Расчёт текущего порыва ветра
+        let currentGust = 0;
+        if (gustActive) {
+          gustElapsed += dt;
+          if (gustElapsed >= gustDuration) {
+            scheduleNextGust();
+          } else {
+            const t = gustElapsed / gustDuration;
+            // Быстрый накат порыва и более плавный спад
+            const envelope = Math.sin(Math.PI * Math.pow(t, 0.7));
+            currentGust = gustDir * gustPeak * envelope;
+          }
+        } else {
+          gustTimer -= dt;
+          if (gustTimer <= 0) {
+            startGust();
+          }
+        }
+
+        mouseWind *= Math.pow(0.94, frameScale);
+        const totalWind = currentGust + mouseWind;
 
         for (let i = 0; i < flakes.length; i++) {
           const f = flakes[i];
-          f.wobble += f.wobbleSpeed;
+          f.wobble += f.wobbleSpeed * frameScale;
 
-          f.y += f.speedY;
-          f.x += f.speedX + Math.sin(f.wobble) * 0.35 + windBoost * f.depth;
+          const windFactor = 0.55 + f.depth * 0.85;
+          const flakeWind = totalWind * windFactor;
+          const absWind = Math.abs(flakeWind);
 
-          if (f.y > height + 5) {
-            f.y = -5;
+          const vx = f.speedX + Math.sin(f.wobble) * 0.35 + flakeWind;
+          const vy = f.speedY + absWind * 0.14 + Math.sin(f.wobble * 1.6) * Math.min(1.1, absWind * 0.16);
+
+          f.x += vx * frameScale;
+          f.y += vy * frameScale;
+
+          if (f.y > height + 10) {
+            f.y = -10;
             f.x = Math.random() * width;
-          }
-          if (f.x > width + 5) {
-            f.x = -5;
-          } else if (f.x < -5) {
-            f.x = width + 5;
+          } else if (f.y < -15) {
+            f.y = height + 5;
           }
 
-          ctx.beginPath();
-          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${baseColor}, ${f.alpha})`;
-          ctx.fill();
+          if (f.x > width + 15) {
+            f.x = -10;
+            f.y = Math.random() * height;
+          } else if (f.x < -15) {
+            f.x = width + 10;
+            f.y = Math.random() * height;
+          }
+
+          if (absWind > 2.2) {
+            // Короткий вытянутый штрих по направлению ветра (до ~10 px)
+            const speed = Math.hypot(vx, vy) || 1;
+            const tailLen = Math.min(10, (absWind - 2.2) * 0.55) * (0.6 + f.depth * 0.5);
+            const dx = (vx / speed) * tailLen;
+            const dy = (vy / speed) * tailLen;
+            const alpha = Math.min(0.88, f.alpha + absWind * 0.015);
+            ctx.beginPath();
+            ctx.moveTo(f.x - dx, f.y - dy);
+            ctx.lineTo(f.x, f.y);
+            ctx.strokeStyle = `rgba(${baseColor}, ${alpha})`;
+            ctx.lineWidth = f.r * 1.45;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+          } else {
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${baseColor}, ${f.alpha})`;
+            ctx.fill();
+          }
         }
 
         if (isEnabled) {
@@ -3770,6 +3912,7 @@
 
       function startSnow() {
         if (!animId) {
+          lastTime = 0;
           animId = requestAnimationFrame(update);
         }
         canvas.classList.remove('snow-disabled');
@@ -3806,8 +3949,8 @@
 
       window.addEventListener('mousemove', (e) => {
         if (lastMouseX !== null) {
-          const delta = (e.clientX - lastMouseX) * 0.02;
-          windBoost = Math.max(-1.5, Math.min(1.5, windBoost + delta));
+          const delta = (e.clientX - lastMouseX) * 0.025;
+          mouseWind = Math.max(-2.2, Math.min(2.2, mouseWind + delta));
         }
         lastMouseX = e.clientX;
       }, { passive: true });
@@ -3831,90 +3974,90 @@
       }
     })();
 
-    /* ========================================================
-       ПЛАВНАЯ АНИМАЦИЯ АККОРДЕОНА (#faq)
-       ======================================================== */
-    (function () {
-      const detailsList = document.querySelectorAll('#faq details');
-      if (!detailsList.length) return;
+          /* ========================================================
+             ПЛАВНАЯ АНИМАЦИЯ АККОРДЕОНА (#faq)
+             ======================================================== */
+          (function () {
+            const detailsList = document.querySelectorAll('#faq details');
+            if (!detailsList.length) return;
 
-      class Accordion {
-        constructor(el) {
-          this.el = el;
-          this.summary = el.querySelector('summary');
-          this.content = el.querySelector('p');
-          this.animation = null;
-          this.isClosing = false;
-          this.isExpanding = false;
+            class Accordion {
+              constructor(el) {
+                this.el = el;
+                this.summary = el.querySelector('summary');
+                this.content = el.querySelector('p');
+                this.animation = null;
+                this.isClosing = false;
+                this.isExpanding = false;
 
-          if (!this.summary || !this.content) return;
-          this.summary.addEventListener('click', (e) => this.onClick(e));
-        }
+                if (!this.summary || !this.content) return;
+                this.summary.addEventListener('click', (e) => this.onClick(e));
+              }
 
-        onClick(e) {
-          e.preventDefault();
-          this.el.style.overflow = 'hidden';
-          if (this.isClosing || !this.el.open) {
-            this.open();
-          } else if (this.isExpanding || this.el.open) {
-            this.shrink();
-          }
-        }
+              onClick(e) {
+                e.preventDefault();
+                this.el.style.overflow = 'hidden';
+                if (this.isClosing || !this.el.open) {
+                  this.open();
+                } else if (this.isExpanding || this.el.open) {
+                  this.shrink();
+                }
+              }
 
-        shrink() {
-          this.isClosing = true;
-          const startHeight = `${this.el.offsetHeight}px`;
-          const endHeight = `${this.summary.offsetHeight}px`;
+              shrink() {
+                this.isClosing = true;
+                const startHeight = `${this.el.offsetHeight}px`;
+                const endHeight = `${this.summary.offsetHeight}px`;
 
-          if (this.animation) this.animation.cancel();
+                if (this.animation) this.animation.cancel();
 
-          this.animation = this.el.animate({
-            height: [startHeight, endHeight]
-          }, {
-            duration: 220,
-            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-          });
+                this.animation = this.el.animate({
+                  height: [startHeight, endHeight]
+                }, {
+                  duration: 220,
+                  easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+                });
 
-          this.animation.onfinish = () => this.onAnimationFinish(false);
-          this.animation.oncancel = () => (this.isClosing = false);
-        }
+                this.animation.onfinish = () => this.onAnimationFinish(false);
+                this.animation.oncancel = () => (this.isClosing = false);
+              }
 
-        open() {
-          this.el.style.height = `${this.el.offsetHeight}px`;
-          this.el.open = true;
-          window.requestAnimationFrame(() => this.expand());
-        }
+              open() {
+                this.el.style.height = `${this.el.offsetHeight}px`;
+                this.el.open = true;
+                window.requestAnimationFrame(() => this.expand());
+              }
 
-        expand() {
-          this.isExpanding = true;
-          const startHeight = `${this.el.offsetHeight}px`;
-          const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+              expand() {
+                this.isExpanding = true;
+                const startHeight = `${this.el.offsetHeight}px`;
+                const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
 
-          if (this.animation) this.animation.cancel();
+                if (this.animation) this.animation.cancel();
 
-          this.animation = this.el.animate({
-            height: [startHeight, endHeight]
-          }, {
-            duration: 250,
-            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-          });
+                this.animation = this.el.animate({
+                  height: [startHeight, endHeight]
+                }, {
+                  duration: 250,
+                  easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+                });
 
-          this.animation.onfinish = () => this.onAnimationFinish(true);
-          this.animation.oncancel = () => (this.isExpanding = false);
-        }
+                this.animation.onfinish = () => this.onAnimationFinish(true);
+                this.animation.oncancel = () => (this.isExpanding = false);
+              }
 
-        onAnimationFinish(open) {
-          this.el.open = open;
-          this.animation = null;
-          this.isClosing = false;
-          this.isExpanding = false;
-          this.el.style.height = '';
-          this.el.style.overflow = '';
-        }
-      }
+              onAnimationFinish(open) {
+                this.el.open = open;
+                this.animation = null;
+                this.isClosing = false;
+                this.isExpanding = false;
+                this.el.style.height = '';
+                this.el.style.overflow = '';
+              }
+            }
 
-      detailsList.forEach(el => new Accordion(el));
-    })();
+            detailsList.forEach(el => new Accordion(el));
+          })();
   </script>
 </body>
 
