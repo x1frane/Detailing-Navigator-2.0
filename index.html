@@ -1406,15 +1406,62 @@
     .weather-toolbar {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: .55rem;
+      min-width: 0;
       border-bottom: 1px solid var(--line);
       padding-bottom: .9rem;
     }
 
     .weather-districts {
+      position: relative;
       display: flex;
+      align-items: center;
       gap: .4rem;
-      flex-wrap: wrap;
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scroll-snap-type: x proximity;
+    }
+
+    .weather-districts::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dist-nav-btn {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .dist-nav-btn svg {
+      width: 15px;
+      height: 15px;
+      display: block;
+    }
+
+    .dist-nav-btn:hover {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    .dist-nav-btn:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
     }
 
     .dist-btn {
@@ -1426,6 +1473,9 @@
       border-radius: 20px;
       cursor: pointer;
       font-family: inherit;
+      white-space: nowrap;
+      flex-shrink: 0;
+      scroll-snap-align: center;
       transition: all .15s;
     }
 
@@ -2114,14 +2164,20 @@
 
       .weather-toolbar {
         padding-bottom: .75rem;
+        gap: .4rem;
       }
 
       .weather-districts {
         gap: .35rem;
       }
 
+      .dist-nav-btn {
+        width: 36px;
+        height: 36px;
+      }
+
       .dist-btn {
-        padding: .4rem .7rem;
+        padding: .4rem .75rem;
         font-size: .82rem;
         min-height: 36px;
       }
@@ -2285,8 +2341,8 @@
           </div>
           <span></span>
         </div>
-        <p class="note">Толщины слоёв ориентировочные и зависят от производителя. Светлая часть полосы -толщина слоя от
-          нуля до минимума; более плотная -диапазон допуска (разброс толщин). Фосфатный слой на схеме не показан: это
+        <p class="note">Светлая часть полосы - толщина слоя от
+          нуля до минимума; более плотная - диапазон допуска (разброс толщин). Фосфатный слой на схеме не показан: это
           тонкая плёнка, её измеряют массой на м².</p>
       </div>
 
@@ -2336,9 +2392,8 @@
         </div>
         <div class="card">
           <h3>Сначала замер</h3>
-          <p>Перед защитой стоит измерить покрытие толщиномером. Значения от 300 мкм и больше говорят о повторной
-            окраске.
-          </p>
+          <p>Перед полировкой или оклейкой стоит измерить кузов толщиномером. Это покажет запас лака и перекрашенные
+            детали: значения от 300 мкм и больше говорят о повторной окраске.</p>
         </div>
         <div class="card">
           <h3>Сколы до металла</h3>
@@ -2573,15 +2628,27 @@
       <h2>Погода и советы по уходу</h2>
 
       <div class="weather-box">
-        <!-- Выбор района -->
+        <!-- Выбор района (слайдер с прокруткой и кнопками) -->
         <div class="weather-toolbar">
-          <div class="weather-districts" role="tablist" aria-label="Районы Большого Норильска">
+          <button type="button" class="dist-nav-btn" id="dist-prev" aria-label="Предыдущий район">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <div class="weather-districts" id="weather-districts" role="tablist" aria-label="Районы Большого Норильска">
             <button type="button" class="dist-btn active" data-district="norilsk">Норильск</button>
             <button type="button" class="dist-btn" data-district="talnakh">Талнах</button>
             <button type="button" class="dist-btn" data-district="kayerkan">Кайеркан</button>
             <button type="button" class="dist-btn" data-district="oganer">Оганер</button>
             <button type="button" class="dist-btn" data-district="dudinka">Дудинка</button>
           </div>
+          <button type="button" class="dist-nav-btn" id="dist-next" aria-label="Следующий район">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
         </div>
 
         <!-- Погода: температура, ветер, влажность (выровнено по левому краю) -->
@@ -3627,7 +3694,7 @@
           avoid.push('Не мойте машину на открытых мойках: даже при −6 °C вода успеет замёрзнуть коркой прямо на краске.');
 
           action.push('Хороший момент, чтобы смыть накопившийся налёт и дорожную грязь.');
-          action.push('После мойки можно нанести быстрый кварцевый состав или полимер, чтобы машина дольше оставалась чистой.');
+          action.push('После мойки можно нанести воск или полироль, чтобы обновить гидрофобный слой и защитить лак от налёта.');
 
           coating.push('Полиуретановая плёнка на кузове эластична и полностью гасит удары щебня.');
           coating.push('Керамика сохраняет глубокий блеск и облегчает сушку кузова.');
@@ -3653,7 +3720,7 @@
           alertTitle = 'Сильный ветер: летит щебень на трассе, риск вывернуть двери';
 
           avoid.unshift('На трассе до Кайеркана, Талнаха или Алыкеля держите дистанцию за машинами: базальтовый щебень 3-8 мм вылетает из-под колёс с огромной скоростью.');
-          avoid.push('Придерживайте двери обеими руками при выходе -сильный порыв ветра легко выворачивает петли.');
+          avoid.push('Придерживайте двери обеими руками при выходе — сильный порыв ветра легко выворачивает петли.');
 
           action.unshift('Не паркуйтесь вплотную к зданиям: при шквалах с крыш нередко срывает куски кровли и наледь.');
 
@@ -3732,15 +3799,49 @@
         }
       }
 
-      // Переключение районов
-      distBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          distBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentDistrict = btn.getAttribute('data-district') || 'norilsk';
-          fetchLiveWeather(currentDistrict);
-        });
+      // Переключение районов и центрирование активной кнопки в слайдере
+      const districtsTrack = document.getElementById('weather-districts');
+      const distPrevBtn = document.getElementById('dist-prev');
+      const distNextBtn = document.getElementById('dist-next');
+      const distBtnsArr = Array.from(distBtns);
+
+      function selectDistrictByIndex(index) {
+        if (!distBtnsArr.length) return;
+        const idx = (index + distBtnsArr.length) % distBtnsArr.length;
+        const btn = distBtnsArr[idx];
+
+        distBtnsArr.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (districtsTrack) {
+          const targetLeft = btn.offsetLeft - (districtsTrack.clientWidth / 2) + (btn.offsetWidth / 2);
+          districtsTrack.scrollTo({
+            left: Math.max(0, targetLeft),
+            behavior: 'smooth'
+          });
+        }
+
+        currentDistrict = btn.getAttribute('data-district') || 'norilsk';
+        fetchLiveWeather(currentDistrict);
+      }
+
+      distBtnsArr.forEach((btn, idx) => {
+        btn.addEventListener('click', () => selectDistrictByIndex(idx));
       });
+
+      if (distPrevBtn) {
+        distPrevBtn.addEventListener('click', () => {
+          const activeIdx = distBtnsArr.findIndex(b => b.classList.contains('active'));
+          selectDistrictByIndex((activeIdx === -1 ? 0 : activeIdx) - 1);
+        });
+      }
+
+      if (distNextBtn) {
+        distNextBtn.addEventListener('click', () => {
+          const activeIdx = distBtnsArr.findIndex(b => b.classList.contains('active'));
+          selectDistrictByIndex((activeIdx === -1 ? 0 : activeIdx) + 1);
+        });
+      }
 
       // Инициализация
       fetchLiveWeather(currentDistrict);
@@ -3974,90 +4075,90 @@
       }
     })();
 
-          /* ========================================================
-             ПЛАВНАЯ АНИМАЦИЯ АККОРДЕОНА (#faq)
-             ======================================================== */
-          (function () {
-            const detailsList = document.querySelectorAll('#faq details');
-            if (!detailsList.length) return;
+    /* ========================================================
+       ПЛАВНАЯ АНИМАЦИЯ АККОРДЕОНА (#faq)
+       ======================================================== */
+    (function () {
+      const detailsList = document.querySelectorAll('#faq details');
+      if (!detailsList.length) return;
 
-            class Accordion {
-              constructor(el) {
-                this.el = el;
-                this.summary = el.querySelector('summary');
-                this.content = el.querySelector('p');
-                this.animation = null;
-                this.isClosing = false;
-                this.isExpanding = false;
+      class Accordion {
+        constructor(el) {
+          this.el = el;
+          this.summary = el.querySelector('summary');
+          this.content = el.querySelector('p');
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
 
-                if (!this.summary || !this.content) return;
-                this.summary.addEventListener('click', (e) => this.onClick(e));
-              }
+          if (!this.summary || !this.content) return;
+          this.summary.addEventListener('click', (e) => this.onClick(e));
+        }
 
-              onClick(e) {
-                e.preventDefault();
-                this.el.style.overflow = 'hidden';
-                if (this.isClosing || !this.el.open) {
-                  this.open();
-                } else if (this.isExpanding || this.el.open) {
-                  this.shrink();
-                }
-              }
+        onClick(e) {
+          e.preventDefault();
+          this.el.style.overflow = 'hidden';
+          if (this.isClosing || !this.el.open) {
+            this.open();
+          } else if (this.isExpanding || this.el.open) {
+            this.shrink();
+          }
+        }
 
-              shrink() {
-                this.isClosing = true;
-                const startHeight = `${this.el.offsetHeight}px`;
-                const endHeight = `${this.summary.offsetHeight}px`;
+        shrink() {
+          this.isClosing = true;
+          const startHeight = `${this.el.offsetHeight}px`;
+          const endHeight = `${this.summary.offsetHeight}px`;
 
-                if (this.animation) this.animation.cancel();
+          if (this.animation) this.animation.cancel();
 
-                this.animation = this.el.animate({
-                  height: [startHeight, endHeight]
-                }, {
-                  duration: 220,
-                  easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-                });
+          this.animation = this.el.animate({
+            height: [startHeight, endHeight]
+          }, {
+            duration: 220,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          });
 
-                this.animation.onfinish = () => this.onAnimationFinish(false);
-                this.animation.oncancel = () => (this.isClosing = false);
-              }
+          this.animation.onfinish = () => this.onAnimationFinish(false);
+          this.animation.oncancel = () => (this.isClosing = false);
+        }
 
-              open() {
-                this.el.style.height = `${this.el.offsetHeight}px`;
-                this.el.open = true;
-                window.requestAnimationFrame(() => this.expand());
-              }
+        open() {
+          this.el.style.height = `${this.el.offsetHeight}px`;
+          this.el.open = true;
+          window.requestAnimationFrame(() => this.expand());
+        }
 
-              expand() {
-                this.isExpanding = true;
-                const startHeight = `${this.el.offsetHeight}px`;
-                const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+        expand() {
+          this.isExpanding = true;
+          const startHeight = `${this.el.offsetHeight}px`;
+          const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
 
-                if (this.animation) this.animation.cancel();
+          if (this.animation) this.animation.cancel();
 
-                this.animation = this.el.animate({
-                  height: [startHeight, endHeight]
-                }, {
-                  duration: 250,
-                  easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-                });
+          this.animation = this.el.animate({
+            height: [startHeight, endHeight]
+          }, {
+            duration: 250,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+          });
 
-                this.animation.onfinish = () => this.onAnimationFinish(true);
-                this.animation.oncancel = () => (this.isExpanding = false);
-              }
+          this.animation.onfinish = () => this.onAnimationFinish(true);
+          this.animation.oncancel = () => (this.isExpanding = false);
+        }
 
-              onAnimationFinish(open) {
-                this.el.open = open;
-                this.animation = null;
-                this.isClosing = false;
-                this.isExpanding = false;
-                this.el.style.height = '';
-                this.el.style.overflow = '';
-              }
-            }
+        onAnimationFinish(open) {
+          this.el.open = open;
+          this.animation = null;
+          this.isClosing = false;
+          this.isExpanding = false;
+          this.el.style.height = '';
+          this.el.style.overflow = '';
+        }
+      }
 
-            detailsList.forEach(el => new Accordion(el));
-          })();
+      detailsList.forEach(el => new Accordion(el));
+    })();
   </script>
 </body>
 
